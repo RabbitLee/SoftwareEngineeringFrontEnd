@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link href="css/Global.css" rel="stylesheet" type="text/css"/>
+    <link href="css/personInfo.css" rel="stylesheet" type="text/css"/>
+    <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+    <link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/personInfo.css" rel="stylesheet" type="text/css"/>
+
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jquery.headroom.js"></script>
+    <script src="js/headroom_0.7.0.js"></script>
+
+
+</head>
+<body>
+<!--menu bar-->
+<div class="nav">
+    <span class="nav-on"><i></i><i></i><i></i></span>
+    <div class="navbar-brand" href="#">这是一个logo</div>
+    <ul class = "navbar">
+        <li><a href="loginIn.html" class="signIn item-anchor"><i class="fa fa-user-circle user-icon"></i>登录/注册</a></li>
+        <li><a href="#" class="discover item-anchor">发现</a></li>
+        <li><a href="#" class="team item-anchor">拼团</a></li>
+        <li><a href="route.html" class="start item-anchor">开始规划</a></li>
+        <li><a href="index.html" class="index item-anchor">首页</a></li>
+    </ul>
+
+</div>
+
+<div class = "focus-bar">
+    <div class="title"><i class="fa fa-user-circle"></i> 个人中心</div>
+</div>
+<div class="content">
+    <div class="tabs-vertical">
+
+        <ul id="tab-nav">
+            <li>
+                <a class="tab-active nav-button" data-index="0" href="#">我的路线</a>
+            </li>
+            <li>
+                <a class="nav-button" data-index="1" href="#">我的旅行团</a>
+            </li>
+            <li>
+                <a class="nav-button" data-index="2" href="#">我的游记</a>
+            </li>
+            <li>
+                <a class="nav-button" data-index="3" href="#">我的付款</a>
+            </li>
+            <li>
+                <a class="nav-button" data-index="4" href="#">个人设置</a>
+            </li>
+        </ul>
+
+        <div class="tabs-content-placeholder">
+
+            <section class="tab-content-active" id="getRoute">
+
+            </section>
+
+            <section>
+                <p>Tabs Information 2</p>
+                <img src="images/loginBg.png" alt="Colosseum">
+            </section>
+
+            <section>
+                <p>Tabs Information 2</p>
+                <img src="images/loginBg.png" alt="Sahale Wa">
+            </section>
+            <section>
+                <p>Tabs Information 2</p>
+                <div class="s3 "></div>
+            </section>
+
+            <section class="setting">
+                <div class="setting-form">
+                    <form  id="setting-form" method="post" action="#" autocomplete="on" onsubmit="return settingCheck()">
+                        <h1>更改个人信息</h1>
+                        <p>
+                            <label for="usernamesignup" class="icon icon-user">用户名</label>
+                            <input id="usernamesignup" name="usernamesignup" required="required" type="text"  />
+                            <label id="usernameSignup-info"></label>
+                        </p>
+                        <p>
+                            <label for="emailsignup" class="icon icon-mail"  >电子邮箱</label>
+                            <input id="emailsignup" name="emailsignup" required="required" type="email" onblur="checkEmail();" placeholder="输入已有电子邮箱"/>
+                            <label id="emailinfo"></label>
+                        </p>
+                        <p>
+                            <label for="telesignup" class="icon icon-phone" >手机</label>
+                            <input id="telesignup" name="telesignup" required="required" type="text" onblur="checkEmail();" placeholder="输入手机号码"/>
+                            <label id="teleinfo"></label>
+                        </p>
+                        <p>
+                            <label for="passwordsignup" class="icon icon-lock" >密码 </label>
+                            <input id="passwordsignup" name="passwordsignup" required="required" type="password" onblur="checkPassword();" placeholder="输入密码"/>
+                            <label id="passwordSignup-info"></label>
+                        </p>
+                        <p>
+                            <label for="passwordsignup_confirm" class="icon icon-lock" >确认密码 </label>
+                            <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" onblur="checkRepassword();" placeholder="再次输入密码"/>
+                            <label id="repasswordinfo"></label>
+                        </p>
+                        <p class="change button">
+                            <input type="submit" value="更改"/>
+                        </p>
+                    </form>
+                </div>
+
+                <div class="setting-image">
+                    <img src="images/settingImg.png">
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+</div>
+
+<!--headroom-->
+<script src="js/index.js"></script>
+<script src="js/personInfo.js"></script>
+<div class="footBg"></div>
+<footer>
+    <div class="top">
+        <ul class="column-1">
+            <li style="font-weight: bold; font-size: 120%; color: #a5dee4">"网站名称"</li>
+            <li>上海曹安公路4800同济大学嘉大荒软件学院</li>
+            <li>Github</li>
+            <li>+86 12345678901</li>
+
+        </ul>
+        <hr>
+        <ul class="column-2">
+            <li style="font-weight: bold; font-size: 120%; color: #a5dee4">快速链接</li>
+            <li><a href="#">主页</a></li>
+            <li><a href="#">规划路线</a></li>
+            <li><a href="#">拼团</a></li>
+            <li><a href="#">发现</a></li>
+        </ul>
+        <hr>
+        <ul class="column-3">
+            <li style="font-weight: bold; font-size: 120%; color: #a5dee4">更多</li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">加入我们</a></li>
+            <li><a href="#">其他产品</a></li>
+            <li><a href="#">FAQ</a></li>
+        </ul>
+    </div>
+    <hr>
+    <div class="bottom">
+        <br>
+        Designed and built with all the love in the world by a shaky team.<br>
+        Maintained by the core team with the help of our contributors.<br><br>
+        Copyright©一个有zayy的项目组 All Rights Reserved（2016-）版权所有 复制必究。<br>
+        当前版本： v1.0.0<br>
+    </div>
+
+</footer>
+</body>
+</html>
