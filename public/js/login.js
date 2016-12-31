@@ -20,6 +20,29 @@ function check() {
         return false;
     }
 
+    var isValid = false;
+    $.ajax({
+        url: 'http://rabbitlee.me/isUserValid',
+        data: {
+            "name": name,
+            "password": password,
+        },
+        type: 'post',
+        async: false, //同步
+        dataType: 'json',
+        success: function (data) {
+            isValid = data;
+        },
+        error: function () {
+            alert("连接服务器验证失败！");
+        }
+    });
+    if(!isValid){
+        document.getElementById("signIninfo").innerHTML = "用户名与密码不匹配";
+        $("#signIninfo").css({"color":"red","font-size":"80%"});
+        return isValid;
+    }
+
 }
 
 function signUpCheck() {
@@ -70,6 +93,30 @@ function signUpCheck() {
         document.getElementById("repasswordinfo").innerHTML = "两次输入的密码不一致";
         $("#repasswordinfo").css({"color":"red","font-size":"80%"});
         return false;
+    }
+
+    //验证手机号或邮箱是否已存在
+    var isValid = false;
+    $.ajax({
+        url: 'http://rabbitlee.me/isUserValid',
+        data: {
+            "name": name,
+            "email": email,
+            "telephone": telephone,
+            "password": password,
+        },
+        type: 'post',
+        async: false, //同步
+        dataType: 'json',
+        success: function (data) {
+            isValid = data;
+        },
+        error: function () {
+            alert("连接服务器验证失败！");
+        }
+    });
+    if(!isValid){
+        return isValid;
     }
 }
 function checkEmail() {  //校验Email

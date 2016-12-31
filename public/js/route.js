@@ -3,6 +3,7 @@ var select_city=document.getElementById('city');
 var addSpotList = [];//添加的景点数组
 var CacheProv = "";
 var CacheCity = "";
+var duration = 0;
 $(function() {
     // var provinceArr = getProvice();
     var provinceArr =  {"provinces": ["北京","上海"]}; //test
@@ -24,6 +25,7 @@ function changeCity(prov_value){  //选中省份的时候触发城市
             for(var i = spots.childNodes.length - 1; i >= 0; i--) {
                 spots.removeChild(spots.childNodes[i]);
             }
+            duration = 0;
 
         }
         else{

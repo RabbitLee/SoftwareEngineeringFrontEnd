@@ -28,7 +28,7 @@ function getSpot(city) {
 }
 
 //marker button click
-function markerClick(value, id, level) {
+function markerClick(value, id, time, level) {
     var flag = false;
     $.each(addSpotList, function(i,val){
         if(val == id){
@@ -56,10 +56,14 @@ function markerClick(value, id, level) {
         }
         spots.appendChild(newSpot);
         addSpotList.push(id);
+        duration += time;
+
         newSpot.onclick = function () {
             spots.removeChild(newSpot);
             removeByValue(addSpotList, id);
+            duration -= time;
         }
+
     }
     else {
         alert("该景点已经在您的旅行计划中了：）");
@@ -147,7 +151,7 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
 
             marker.content = '<h3 style="text-align: center">'+spotName[i]+'</h3>' +
                 '<h4 style="text-align: center">推荐游玩时间：'+visitTime[i]+'分钟</h4> '+
-                "<div onclick=\"markerClick(\'"+spotName[i]+"\',\'"+spotId[i]+"\',\'"+spotLevel[i]+"\')\" class='marker-button' >添加</div>";
+                "<div onclick=\"markerClick(\'"+spotName[i]+"\',\'"+spotId[i]+"\',\'"+visitTime[i]+"\',\'"+spotLevel[i]+"\')\" class='marker-button' >添加</div>";
             //给Marker绑定单击事件
             marker.on('click', markerClick);
         }
@@ -177,6 +181,11 @@ function postPlan() {
         alert("提交失败，请选择景点");
         return false;
     }
+
+    //判不判断游览时间的= =感觉好像也没什么必要，毕竟只是规划路线。
+    // if( duration < )
+    //
+    // )
     $.ajax({
         url: 'http://rabbitlee.me/submitSelectedSpots',
         data: {
