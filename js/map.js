@@ -7,7 +7,7 @@ var map = new AMap.Map("mapContainer", {
     // center: [121.5105710000, 31.2889600000],//地图中心点
     zoom: 13 //地图显示的缩放级别
 });
-var addSpotList = [];//添加的景点数组
+
 
 function getSpot(city) {
     var spotArr;
@@ -76,8 +76,24 @@ function removeByValue(arr, val) {
     }
 }
 
-function changeSpot(city_value){
+function changeSpot(city_value){ //更改城市时触发的函数，生成新的坐标点
 
+    if(addSpotList.length > 0)
+    {
+        if(confirm("每次只能选择一个城市哦~确定要重新选择并清空已选景点吗:）"))
+        {
+            var spots = document.getElementById("selectd-spots");
+            addSpotList.splice(0,addSpotList.length);//清空数组
+            for(var i = spots.childNodes.length - 1; i >= 0; i--) {
+                spots.removeChild(spots.childNodes[i]);
+            }
+
+        }
+        else{
+            select_city.value = CacheCity;
+            return;
+        }
+    }
 
     if(city_value!="")
     {
@@ -130,6 +146,7 @@ function changeSpot(city_value){
             });
 
             marker.content = '<h3 style="text-align: center">'+spotName[i]+'</h3>' +
+                '<h4 style="text-align: center">推荐游玩时间：'+visitTime[i]+'分钟</h4> '+
                 "<div onclick=\"markerClick(\'"+spotName[i]+"\',\'"+spotId[i]+"\',\'"+spotLevel[i]+"\')\" class='marker-button' >添加</div>";
             //给Marker绑定单击事件
             marker.on('click', markerClick);
@@ -146,4 +163,35 @@ function changeSpot(city_value){
     else{
     }
 // 创建多个标记点
+    CacheCity = city_value;
+}
+
+function postPlan() {
+    var dpd1 = document.getElementById("dpd1").value;
+    var dpd2 = document.getElementById("dpd2").value;
+    if(dpd1 == ""||dpd2 == "" ){
+        alert("提交失败，请选择出行日期");
+        return false;
+    }
+    if(addSpotList.length <=0 ){
+        alert("提交失败，请选择景点");
+        return false;
+    }
+    $.ajax({
+        url: 'http://rabbitlee.me/submitSelectedSpots',
+        data: {
+            "start_date": dpd1,
+            "end_date": dpd2,
+            "spots_id": addSpotList
+        },
+        type: 'post',
+        async: false, //同步
+        dataType: 'json',
+        success: function (data) {
+            return;
+        },
+        error: function () {
+            alert("上传景点数据失败！");
+        }
+    });
 }

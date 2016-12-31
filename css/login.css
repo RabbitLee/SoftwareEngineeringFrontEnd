@@ -291,7 +291,7 @@ input {
     transition: all 0.2s linear;
 }
 #wrapper p.button input:hover{
-    background: #66bab7;
+    background: #00896c;
     border: 1px solid #268790;
 }
 #wrapper p.button input:active,
