@@ -4,9 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var redisStore = require('connect-redis');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -21,9 +21,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    // store: new redisStore(),
+    secret: 'recommand 128 bytes random string',
+    // cookie: {user: "default", maxAge: 2*60*60*0},
+    httpOnly: true,
+    resave: true,
+    saveUninitialized: true
+}));
 
-app.use('/', index);
-app.use('/users', users);
+let test = require('./routes/test');
+app.use('/test', test);
+let login = require('./routes/login');
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
