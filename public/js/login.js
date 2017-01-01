@@ -20,9 +20,9 @@ function check() {
         return false;
     }
 
-    var isValid = false;
+
     $.ajax({
-        url: 'http://rabbitlee.me/isUserValid',
+        url: 'http://rabbitlee.me/login/isUserValid',
         data: {
             "name": name,
             "password": password,

@@ -38,13 +38,14 @@ function changeCity(prov_value){  //选中省份的时候触发城市
     {
         select_city.options.length=0;
         select_city.options.add(new Option("请选择城市",""));
-
+        select_city.options[0].disabled = true;
         // var cityArr = getCity(prov_value);
-        var cityArr = {"cities": ["五角场","同济大学"]};//test
+        var cityArr = {"cities": ["北京市","上海市"]};//test
 
         select_city.disabled = false;
         $.each(cityArr.cities, function(i,val){
             select_city.options.add(new Option(val,val));
+
         });
     }
     else{
@@ -90,3 +91,4 @@ function getCity(province) {
     });
     return cityArr;
 }
+

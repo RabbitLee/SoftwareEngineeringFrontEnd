@@ -7,7 +7,16 @@ var map = new AMap.Map("mapContainer", {
     // center: [121.5105710000, 31.2889600000],//地图中心点
     zoom: 13 //地图显示的缩放级别
 });
+//创建显示路线的地图
+var RouteMap = new AMap.Map("RouteContainer", {
+    resizeEnable: true,
+    // center: [116.397428, 39.90923],//地图中心点
+    zoom: 13 //地图显示的缩放级别
+});
 
+var myRoute;
+var RouteColor = ['#d0104c','#ffbb33','#ff8800','#f596aa','#1c2331','#5e35b1','#fff']
+var cur_color = '#d0104c';
 
 function getSpot(city) {
     var spotArr;
@@ -91,6 +100,7 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
             for(var i = spots.childNodes.length - 1; i >= 0; i--) {
                 spots.removeChild(spots.childNodes[i]);
             }
+            map.clearMap();
 
         }
         else{
@@ -102,8 +112,8 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
     if(city_value!="")
     {
         // var spotArr = getSpot(city_value);
-        var spotArr = [{"names": "五角场", "id":"a", "visit_time":"60","coordinate":[121.507891, 31.28795],"levle":"0"},
-            {"names": "复旦", "id":"b", "visit_time":"30","coordinate":[121.5109710000, 31.2889600000],"levle":"1"}];//test
+        var spotArr = [{"names": "五角场", "id":"a", "visit_time":60,"coordinate":[121.507891, 31.28795],"levle":0},
+            {"names": "复旦", "id":"b", "visit_time":30,"coordinate":[121.5109710000, 31.2889600000],"levle":1}];//test
 
         var lnglats = [],
             spotName = [],
@@ -132,7 +142,7 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
         });
         var icon;
         for(var i = 0, marker; i < lnglats.length; i++){
-            if(spotLevel[i]=="1"){
+            if(spotLevel[i]==1){
                 icon = iconRed;
             }
             else{
@@ -164,17 +174,21 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
             infoWindow.open(map, e.target.getPosition());
         }
     }
+
     else{
     }
 // 创建多个标记点
+
     CacheCity = city_value;
 }
 
 function postPlan() {
+
     var dpd1 = document.getElementById("dpd1").value;
     var dpd2 = document.getElementById("dpd2").value;
     if(dpd1 == ""||dpd2 == "" ){
         alert("提交失败，请选择出行日期");
+
         return false;
     }
     if(addSpotList.length <=0 ){
@@ -186,7 +200,7 @@ function postPlan() {
     // if( duration < )
     //
     // )
-    $.ajax({
+     $.ajax({
         url: 'http://rabbitlee.me/submitSelectedSpots',
         data: {
             "start_date": dpd1,
@@ -197,10 +211,143 @@ function postPlan() {
         async: false, //同步
         dataType: 'json',
         success: function (data) {
-            return;
+            myRoute = data;
+
         },
         error: function () {
             alert("上传景点数据失败！");
+            //test
+//test 显示路线
+            $(".content").hide();
+
+            $("#RouteContent").show();
+            myRoute ={"spots_id": [["1", "2"],["2","3"]],
+                "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
+                "name": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
+                "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
+            var colorID = 0;
+
+            var insertDate = "旅行日期: "+dpd1+" ~ "+dpd2;
+            var insertCity = "目的城市: "+CacheCity;
+            document.getElementById("dateLabel").innerHTML = insertDate;
+            document.getElementById("cityLabel").innerHTML = insertCity;
+            for(var i = 0; i < myRoute.coordinate.length; i++){
+                //每天
+                var newRouteLabel = document.createElement("div");
+                newRouteLabel.setAttribute("class","newRouteLabel");
+                var day = i + 1;
+                var insertRoute = "第"+day+"天: ";
+                cur_color = RouteColor[colorID];
+                for(var j = 0; j < myRoute.coordinate[i].length-1; j++){
+                    //每段路线
+                    //载入路线
+                    loadTransfer(myRoute.coordinate[i][j], myRoute.coordinate[i][j+1]);
+
+                    //每个景点的marker
+                    marker = new AMap.Marker({
+                        position:myRoute.coordinate[i][j],
+                        map:RouteMap,
+                    });
+                    marker.setLabel({
+                        offset: new AMap.Pixel(10, -25),
+                        content: myRoute.name[i][j],
+                    });
+                    marker.content = '<h3 style="text-align: center">'+ myRoute.name[i][j]+'</h3>' +
+                        '<h4 style="text-align: center">推荐开始游玩时间：'+myRoute.time[i][j][0]+'点, 结束游玩时间：'+myRoute.time[i][j][1]+'点</h4> ';
+                    //给Marker绑定单击事件
+                    marker.on('click', RouteMarkerClick);
+
+                    insertRoute += myRoute.name[i][j]+' --> ';
+                    if( j == myRoute.coordinate[i].length-2 ){
+                        marker = new AMap.Marker({
+                            position:myRoute.coordinate[i][j+1],
+                            map:RouteMap,
+                        });
+                        marker.setLabel({
+                            offset: new AMap.Pixel(10, -25),
+                            content: myRoute.name[i][j+1],
+                        });
+                        marker.content = '<h3 style="text-align: center">'+myRoute.name[i][j+1]+'</h3>' +
+                            '<h4 style="text-align: center">推荐开始游玩时间:'+myRoute.time[i][j+1][0]+'点 , 结束游玩时间:'+myRoute.time[i][j+1][1]+'点</h4>';
+                        //给Marker绑定单击事件
+                        marker.on('click', RouteMarkerClick);
+
+                        insertRoute += myRoute.name[i][j+1];
+                    }
+
+                }
+                colorID++;
+
+                newRouteLabel.innerHTML = insertRoute;
+                document.getElementById("routeLabel").appendChild(newRouteLabel);
+                //= =我能说什么呢
+                if(colorID >= 7){
+                    colorID = 0;
+                }
+            }
+            RouteMap.setFitView();
+            var infoWindow = new AMap.InfoWindow();
+            function RouteMarkerClick(e){
+                infoWindow.setContent(e.target.content);
+                infoWindow.open(RouteMap, e.target.getPosition());
+            }
+
+
         }
     });
+    window.location.href = "#navbar";
+    return false;
+
+
 }
+
+/*
+ * 调用公交换乘服务
+ */
+function loadTransfer(start,destination) {
+
+    AMap.service(["AMap.Transfer"], function() {
+        var transOptions = {
+            map: RouteMap,
+            // city: CacheCity,
+            city: CacheCity,
+            //公交城市
+            //cityd:'乌鲁木齐',
+            hideMarkers: true,
+            outlineColor: cur_color,
+            policy: AMap.TransferPolicy.LEAST_TIME, //乘车策略
+            // showTraffic: true,
+
+        };
+        //构造公交换乘类
+        var trans = new AMap.Transfer(transOptions);
+        //根据起、终点坐标查询公交换乘路线
+        //trans.search([{keyword:'人民广场'},{keyword:'同济大学（地铁站）'}], function(status, result){
+        //trans.search([{keyword:'五角场(地铁站)'},{keyword:'同济大学（地铁站）'}], function(status, result){
+        trans.search(start,destination,function(status, result){
+            //trans.search([121.51487,31.299297],[121.506357,31.282086],function(status, result){
+        });
+    });
+}
+
+
+//
+// AMap.service(["AMap.Transfer"], function() {
+//     var transOptions = {
+//         map: RouteMap,
+//         city: '上海市',                           //公交城市
+//         //cityd:'乌鲁木齐',
+//         hideMarkers: true,
+//         outlineColor: 'yellow',
+//         policy: AMap.TransferPolicy.LEAST_TIME //乘车策略
+//
+//     };
+//     //构造公交换乘类
+//     var trans = new AMap.Transfer(transOptions);
+//     //根据起、终点坐标查询公交换乘路线
+//     //trans.search([{keyword:'同济大学（地铁站）'},{keyword:'迪士尼'}], function(status, result){
+//     //trans.search([{keyword:'江湾体育场(地铁站)'},{keyword:'同济大学（地铁站）'}], function(status, result){
+//     trans.search([121.506357,31.282086],[121.674272,31.164291],function(status, result){
+//         //trans.search([121.514222,31.302853],[121.506357,31.282086],function(status, result){
+//     });
+// });

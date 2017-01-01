@@ -23,11 +23,11 @@
 </head>
 <body>
 <!--menu bar-->
-<div class="nav">
+<div id="navbar" class="nav">
     <span class="nav-on"><i></i><i></i><i></i></span>
     <div class="navbar-brand" href="#">这是一个logo</div>
     <ul class = "navbar">
-        <li><a href="loginIn.html" class="signIn item-anchor"><i class="fa fa-user-circle user-icon"></i>登录/注册</a></li>
+        <li><a href="login.html" class="signIn item-anchor"><i class="fa fa-user-circle user-icon"></i>登录/注册</a></li>
         <li><a href="#" class="discover item-anchor">发现</a></li>
         <li><a href="#" class="team item-anchor">拼团</a></li>
         <li><a href="route.html" class="start item-anchor">开始规划</a></li>
@@ -40,29 +40,29 @@
 </div>
 
 <div class="content" >
-    <div class="left-container" >
-        <div class="wrapper">
-            <h1>自定义您的旅行计划 指南</h1>
-            <div class="subtitle">选择您计划的出行时段</div>
-            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
-            <div class="subtitle">选择您的目的城市</div>
-            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
-            <div class="subtitle">在地图中查看景点</div>
-            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
-            <div class="subtitle">红色景点为推荐景点，蓝色为普通景点</div>
-            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
-            <div class="subtitle">点击景点，查看详细信息，<br>添加到选择景点列表中</div>
-            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
-            <div class="subtitle">您选择的景点将显示在地图上方</div>
-            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
-            <div class="subtitle">点击列表中相应景点还可移除</div>
-            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
-            <div class="subtitle">现在可以提交您的计划啦</div>
-        </div>
-    </div>
-    <div class="right-container">
+    <!--<div class="left-container" >-->
+        <!--<div class="wrapper">-->
+            <!--<h1>自定义您的旅行计划 指南</h1>-->
+            <!--<div class="subtitle">选择您计划的出行时段</div>-->
+            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+            <!--<div class="subtitle">选择您的目的城市</div>-->
+            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+            <!--<div class="subtitle">在地图中查看景点</div>-->
+            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+            <!--<div class="subtitle">红色景点为推荐景点，蓝色为普通景点</div>-->
+            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+            <!--<div class="subtitle">点击景点，查看详细信息，<br>添加到选择景点列表中</div>-->
+            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+            <!--<div class="subtitle">您选择的景点将显示在地图上方</div>-->
+            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+            <!--<div class="subtitle">点击列表中相应景点还可移除</div>-->
+            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+            <!--<div class="subtitle">现在可以提交您的计划啦</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="container">
         <form id="cityForm" name="cityForm" onsubmit="return postPlan()">
-            <p class="plan-title"><b></b><span>我的旅行计划</span><b></b></p>
+            <p class="plan-title"><b></b><span>制定我的旅行计划</span><b></b></p>
             <div class="date">
                 <label>开始日期：</label>
                 <input type="text" class="span2" value="" id="dpd1">
@@ -71,19 +71,34 @@
             </div>
 
             <div class="prov-city">
-                <label>目的省份：</label><select onchange="changeCity(this.value)" class="prov" id="province"><option value ="">请选择省份</option></select>
-                <label>目的城市：</label><select onchange="changeSpot(this.value)" class="city" id="city" disabled="disabled"><option value ="">请选择城市</option></select>
+                <label>目的省份：</label><select onchange="changeCity(this.value)" class="prov" id="province"><option value =""  disabled selected>请选择省份</option></select>
+                <label>目的城市：</label><select onchange="changeSpot(this.value)" class="city" id="city" disabled="disabled"><option value =""  disabled selected>请选择城市</option></select>
             </div>
             <div class="spots">已选中的景点：</div>
             <div id="selectd-spots" class="spot-content"></div>
             <!--地图样式只能在html里改？因为顺序问题？坑= =-->
             <div class="map">
-                <div id="mapContainer" style="position: static; width: 100%; height: 500px"></div>
+                <div id="mapContainer" style="position: static; width: 100%; height: 600px"></div>
             </div>
-            <input id="spotSubmit" type="submit" value="提交计划">
-
+            <input id="spotSubmit" type="submit" value="生成路线">
         </form>
     </div>
+</div>
+
+<div id="RouteContent">
+    <div class="routeWrapper">
+        <p class="plan-title"><b></b><span>路线生成成功<i class="fa fa-check"></i></span><b></b></p>
+        <div id="dateLabel"></div>
+        <div id="cityLabel"></div><br>
+        <div id="routeLabel"></div>
+        <div id="RouteContainer" style="position: static; width:90%; height:600px" ></div>
+        <div class="share">
+            <label><input name="shared" type="radio" value="1" checked/>公开（接受拼团） </label>
+            <label><input name="shared" type="radio" value="0" />私密 </label>
+        </div>
+        <button id="Routeconfirm" type="button">发布路线</button>
+    </div>
+
 </div>
 
 
@@ -93,6 +108,7 @@
 <script src="js/map.js"></script>
 <script src="datePicker/js/foundation-datepicker.js"></script>
 <script src="datePicker/js/locales/foundation-datepicker.zh-CN.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/demos/js/liteToolbar.js"></script>
 <script>
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
