@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link href="css/Global.css" rel="stylesheet" type="text/css"/>
+
+    <link href="datePicker/css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+    <link href="css/route.css" rel="stylesheet" type="text/css"/>
+    <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+    <link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main.css?v=1.0"/>
+
+
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jquery.headroom.js"></script>
+    <script src="js/headroom_0.7.0.js"></script>
+    <script type="text/javascript"
+            src="http://webapi.amap.com/maps?v=1.3&key=9ddd6a45bb2946d784a0c4bdd8bb5e15"></script>
+
+</head>
+<body>
+<!--menu bar-->
+<div class="nav">
+    <span class="nav-on"><i></i><i></i><i></i></span>
+    <div class="navbar-brand" href="#">这是一个logo</div>
+    <ul class = "navbar">
+        <li><a href="loginIn.html" class="signIn item-anchor"><i class="fa fa-user-circle user-icon"></i>登录/注册</a></li>
+        <li><a href="#" class="discover item-anchor">发现</a></li>
+        <li><a href="#" class="team item-anchor">拼团</a></li>
+        <li><a href="route.html" class="start item-anchor">开始规划</a></li>
+        <li><a href="index.html" class="index item-anchor">首页</a></li>
+    </ul>
+</div>
+
+<div class = "head-bar">
+    <div><i class="fa fa-suitcase"></i> 旅行 , 从此开始</div>
+</div>
+
+<div class="content" >
+    <div class="left-container" >
+        <div class="wrapper">
+            <h1>自定义您的旅行计划 指南</h1>
+            <div class="subtitle">选择您计划的出行时段</div>
+            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
+            <div class="subtitle">选择您的目的城市</div>
+            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
+            <div class="subtitle">在地图中查看景点</div>
+            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
+            <div class="subtitle">红色景点为推荐景点，蓝色为普通景点</div>
+            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
+            <div class="subtitle">点击景点，查看详细信息，<br>添加到选择景点列表中</div>
+            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
+            <div class="subtitle">您选择的景点将显示在地图上方</div>
+            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
+            <div class="subtitle">点击列表中相应景点还可移除</div>
+            <div class="arrowDown"><i class="fa fa-arrow-down"></i></div>
+            <div class="subtitle">现在可以提交您的计划啦</div>
+        </div>
+    </div>
+    <div class="right-container">
+        <form id="cityForm" name="cityForm" onsubmit="return postPlan()">
+            <p class="plan-title"><b></b><span>我的旅行计划</span><b></b></p>
+            <div class="date">
+                <label>开始日期：</label>
+                <input type="text" class="span2" value="" id="dpd1">
+                <label>结束日期：</label>
+                <input type="text" class="span2" value="" id="dpd2">
+            </div>
+
+            <div class="prov-city">
+                <label>目的省份：</label><select onchange="changeCity(this.value)" class="prov" id="province"><option value ="">请选择省份</option></select>
+                <label>目的城市：</label><select onchange="changeSpot(this.value)" class="city" id="city" disabled="disabled"><option value ="">请选择城市</option></select>
+            </div>
+            <div class="spots">已选中的景点：</div>
+            <div id="selectd-spots" class="spot-content"></div>
+            <!--地图样式只能在html里改？因为顺序问题？坑= =-->
+            <div class="map">
+                <div id="mapContainer" style="position: static; width: 100%; height: 500px"></div>
+            </div>
+            <input id="spotSubmit" type="submit" value="提交计划">
+
+        </form>
+    </div>
+</div>
+
+
+<!--js-->
+<script src="js/index.js"></script>
+<script src="js/route.js"></script>
+<script src="js/map.js"></script>
+<script src="datePicker/js/foundation-datepicker.js"></script>
+<script src="datePicker/js/locales/foundation-datepicker.zh-CN.js"></script>
+<script>
+    var nowTemp = new Date();
+    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+    var checkin = $('#dpd1').fdatepicker({
+        onRender: function (date) {
+            return date.valueOf() < now.valueOf() ? 'disabled' : '';
+        }
+    }).on('changeDate', function (ev) {
+        if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.update(newDate);
+        }
+        checkin.hide();
+        $('#dpd2')[0].focus();
+    }).data('datepicker');
+    var checkout = $('#dpd2').fdatepicker({
+        onRender: function (date) {
+            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+        }
+    }).on('changeDate', function (ev) {
+        checkout.hide();
+    }).data('datepicker');
+</script>
+
+
+
+<div class="footBg"></div>
+<footer>
+    <div class="top">
+        <ul class="column-1">
+            <li style="font-weight: bold; font-size: 120%; color: #a5dee4">"网站名称"</li>
+            <li>上海曹安公路4800同济大学嘉大荒软件学院</li>
+            <li>Github</li>
+            <li>+86 12345678901</li>
+
+        </ul>
+        <hr>
+        <ul class="column-2">
+            <li style="font-weight: bold; font-size: 120%; color: #a5dee4">快速链接</li>
+            <li><a href="#">主页</a></li>
+            <li><a href="#">规划路线</a></li>
+            <li><a href="#">拼团</a></li>
+            <li><a href="#">发现</a></li>
+        </ul>
+        <hr>
+        <ul class="column-3">
+            <li style="font-weight: bold; font-size: 120%; color: #a5dee4">更多</li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">加入我们</a></li>
+            <li><a href="#">其他产品</a></li>
+            <li><a href="#">FAQ</a></li>
+        </ul>
+    </div>
+    <hr>
+    <div class="bottom">
+        <br>
+        Designed and built with all the love in the world by a shaky team.<br>
+        Maintained by the core team with the help of our contributors.<br><br>
+        Copyright©一个有zayy的项目组 All Rights Reserved（2016-）版权所有 复制必究。<br>
+        当前版本： v1.0.0<br>
+    </div>
+
+</footer>
+</body>
+</html>

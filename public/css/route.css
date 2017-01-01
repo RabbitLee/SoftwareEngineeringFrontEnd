@@ -1,0 +1,279 @@
+body{
+    /*background-color: #66bab7;*/
+    background-color: #fff ;
+    background-size: cover;
+}
+.head-bar{
+    height: 200px;
+    text-align: center;
+    background-color: #00aa90;
+    -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+}
+.head-bar div{
+    color: white;
+    line-height: 250px;
+    font-weight: bold;
+    font-size: 300%;
+    letter-spacing: 2px;
+    text-shadow:2px 2px 0 #00aa90, 6px 6px 0 #268785;
+}
+.content{
+    width: 100%;
+    height: 900px;
+}
+.left-container{
+    width: 40%;
+    height: 100%;
+    float: left;
+
+}
+.left-container .wrapper {
+    width: 90%;
+    height: 90%;
+    background: url("../images/planeBg.png"), no-repeat;
+    background-size: cover;
+    margin-top: 50px;
+    margin-left: 50px;
+    /*border: 2px solid #00aa90;*/
+    /*background-color: #F5FEEF;*/
+    border-radius: 20px;
+}
+.left-container .wrapper h1{
+   margin-bottom: 100px;
+    text-align: center;
+    color: #00aa90;
+}
+.left-container .wrapper .subtitle{
+    padding: 10px 0;
+    border: 2px solid #00aa90;
+    border-radius: 5px;
+    margin: 5px 120px;
+    font-size: 120%;
+    text-align: center;
+    color: #268785;
+}
+.left-container .wrapper .arrowDown{
+    text-align: center;
+}
+
+.right-container{
+    width: 60%;
+    height: 100%;
+    float: right;
+    /*background-color: #4ba7a4;*/
+}
+
+#cityForm select{
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+
+    width: 150px;
+    height: 30px;
+    color: #00aa90;
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 1px #268785;
+
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("../images/arrowDrop.png") no-repeat scroll right center #fff;
+    background-size: cover;
+
+    -webkit-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+    -moz-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+    box-shadow: 0px 1px 4px 0px rgba(98, 152, 152, 0.6) inset;
+
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+    padding-left: 5px;
+}
+#cityForm{
+    margin-left: 100px;
+    margin-right: 50px;
+}
+
+#cityForm p b{
+    background: #00aa90;
+    margin-top: 4px;
+    display: inline-block;
+    width: 30%;
+    height: 1px;
+    _overflow: hidden;
+    vertical-align: middle;
+    box-shadow: 0px 1px 0 #fff, 0px 3px 0 #268785;
+}
+#cityForm p span{
+    font-size: 200%;
+    display: inline-block;
+    text-align: center;
+    width: 40%;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    color: #00aa90;
+    text-shadow:1px 1px 0 #fff, 3px 3px 0 #629897;
+
+}
+#cityForm label{
+    color: #268785;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.date{
+    width:100%;
+    display: block;
+}
+.date input{
+    width:100px;
+    padding: 5px;
+    border: 1px solid rgb(38, 135, 133);
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing : content-box;
+    box-sizing : content-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+    -moz-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+    box-shadow: 0px 1px 4px 0px rgba(98, 152, 152, 0.6) inset;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+select option{
+    color: #00aa90;
+}
+.spots{
+    margin-top: 20px;
+    float: left;
+    color: #268785;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.spot-content{
+    margin-top: 20px;
+    float: left;
+}
+.map{
+    margin-top: 50px;
+}
+.marker-button{
+    background-color: #00aa90;
+    color: #fff;
+    text-align: center;
+    font-size: 100%;
+    border: 1px solid #138674;
+    margin-left: auto;
+    padding: 2px 5px 2px 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow:
+            0px 1px 1px 1px rgb(210, 210, 210);
+    -moz-box-shadow:
+            0px 1px 1px 1px rgb(210, 210, 210);
+    box-shadow:
+            0px 1px 1px 1px rgb(210, 210, 210);
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+.marker-button:hover{
+    background: #00896c;
+    border: 1px solid #268790;
+}
+.marker-button:active,
+.marker-button:focus{
+    background: #268785;
+    border: 1px solid #268790;
+    -webkit-box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;
+}
+.newSpotBlue{
+    /*width: 10px;*/
+    /*height: 20px;*/
+    color: #fff;
+    font-size: 90%;
+    float: left;
+    background-color: #4ba7a4;
+    border: 1px solid #268790;
+    border-radius: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-left: 2px;
+}
+.newSpotBlue{
+    /*width: 10px;*/
+    /*height: 20px;*/
+    color: #fff;
+    font-size: 90%;
+    float: left;
+    background-color: #005caf;
+    border: 1px solid #0b3461;
+    border-radius: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-left: 3px;
+    cursor: pointer;
+}
+.newSpotRed{
+    /*width: 10px;*/
+    /*height: 20px;*/
+    color: #fff;
+    font-size: 90%;
+    float: left;
+    background-color: #d0104c;
+    border: 1px solid #b5495b;
+    border-radius: 10px;
+    padding: 0 10px 0 10px;
+    margin-left: 3px;
+    cursor: pointer;
+}
+.prov-city{
+    margin-top: 20px;
+    width:100%;
+    display: block;
+}
+
+#spotSubmit{
+    width: 150px;
+    cursor: pointer;
+    background: #00aa90;
+    padding: 6px 1px;
+    color: #fff;
+    font-size: 24px;
+    border: 1px solid #138674;
+    margin: 20px auto;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 5px;
+    -webkit-box-shadow:
+            0px 1px 1px 1px rgb(210, 210, 210);
+    -moz-box-shadow:
+            0px 1px 1px 1px rgb(210, 210, 210);
+    box-shadow:
+            0px 1px 1px 1px rgb(210, 210, 210);
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+
+}
+#spotSubmit:hover{
+    background: #00896c;
+    border: 1px solid #268790;
+}
+#spotSubmit:active,
+#spotSubmit:focus{
+    background: #268785;
+    position: relative;
+    top: 1px;
+    border: 1px solid #268790;
+    -webkit-box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;
+}

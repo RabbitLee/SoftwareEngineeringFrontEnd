@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login in</title>
+    <link href="css/login.css" rel="stylesheet" type="text/css"/>
+    <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+    <link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-3.1.0.min.js"></script>
+
+
+</head>
+<body>
+<div class="container">
+    <section>
+        <div id="sign-form" >
+            <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+            <a class="hiddenanchor" id="toregister"></a>
+            <a class="hiddenanchor" id="tologin"></a>
+            <div id="wrapper">
+                <div id="login" class="animate form">
+                    <form  id="signIn-form" method="post" action="index.html" autocomplete="on" onsubmit="return check()">
+                        <h1><i class="fa fa-paper-plane"></i> 登录</h1>
+                        <label id="signIninfo"></label>
+                        <p>
+                            <label for="username" class="uname" data-icon="u" >用户名</label>
+                            <input id="username" name="username" required="required" type="text" placeholder="输入账号名称"/>
+                            <label id="usernameinfo"></label>
+                        </p>
+                        <p>
+                            <label for="password" class="youpasswd" data-icon="p">密码</label>
+                            <input id="password" name="password" required="required" type="password" placeholder="输入密码" />
+                            <label id="passwordinfo"></label>
+                        </p>
+                        <p class="keeplogin">
+                            <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+                            <label for="loginkeeping">记住我</label>
+                        </p>
+                        <p class="login button">
+                            <input type="submit" value="登录" />
+                        </p>
+                        <p class="change_link">
+                            <a href="index.html" class="back">返回首页</a>
+                            还没有账号？
+                            <a href="#toregister" class="to_register">快速注册</a>
+                        </p>
+                    </form>
+                </div>
+
+                <div id="register" class="animate form">
+                    <form  id="signUp-form" method="post" action="index.html" autocomplete="on" onsubmit="return signUpCheck()">
+                        <h1><i class="fa fa-paper-plane"></i> 注册</h1>
+                        <p>
+                            <label for="usernamesignup" class="icon icon-user">用户名</label>
+                            <input id="usernamesignup" name="usernamesignup" required="required" type="text" onblur="checkName();" placeholder="创建账号名称" />
+                            <label id="usernameSignup-info"></label>
+                        </p>
+                        <p>
+                            <label for="emailsignup" class="icon icon-mail"  >电子邮箱</label>
+                            <input id="emailsignup" name="emailsignup" required="required" type="email" onblur="checkEmail();" placeholder="输入已有电子邮箱"/>
+                            <label id="emailinfo"></label>
+                        </p>
+                        <p>
+                            <label for="telesignup" class="icon icon-phone" >手机</label>
+                            <input id="telesignup" name="telesignup" required="required" type="text" onblur="checkEmail();" placeholder="输入手机号码"/>
+                            <label id="teleinfo"></label>
+                        </p>
+                        <p>
+                            <label for="passwordsignup" class="icon icon-lock" >密码 </label>
+                            <input id="passwordsignup" name="passwordsignup" required="required" type="password" onblur="checkPassword();" placeholder="输入密码"/>
+                            <label id="passwordSignup-info"></label>
+                        </p>
+                        <p>
+                            <label for="passwordsignup_confirm" class="icon icon-lock" >确认密码 </label>
+                            <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" onblur="checkRepassword();" placeholder="再次输入密码"/>
+                            <label id="repasswordinfo"></label>
+                        </p>
+                        <p class="signin button">
+                            <input type="submit" value="注册"/>
+                        </p>
+                        <p class="change_link">
+                            <a href="index.html" class="back">返回首页</a>
+                            已经有账号？
+                            <a href="#tologin" class="to_register">快速登录 </a>
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+<script src="js/login.js"></script>
+</body>
+</html>
