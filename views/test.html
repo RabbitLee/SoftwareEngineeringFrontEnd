@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>index</title>
-    <script src="jquery.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 This is a <p>index</p>
@@ -13,8 +13,8 @@ This is a <p>index</p>
         type: "POST",
         url: "http://localhost:3000/login/isUserValid",
         data: {
-            name: "lyc",
-            password: "lyc123"
+            name: "李逸超",
+            password: "lyc"
         },
         success: function (data) {
             console.log(data);

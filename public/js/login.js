@@ -22,7 +22,7 @@ function check() {
 
     var isValid = false;
     $.ajax({
-        url: 'http://rabbitlee.me/isUserValid',
+        url: '/login/isUserValid',
         data: {
             "name": name,
             "password": password,
@@ -31,7 +31,7 @@ function check() {
         async: false, //同步
         dataType: 'json',
         success: function (data) {
-            isValid = data;
+            isValid = data.isValid;
         },
         error: function () {
             alert("连接服务器验证失败！");

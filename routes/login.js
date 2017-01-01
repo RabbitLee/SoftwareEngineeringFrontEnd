@@ -3,22 +3,30 @@
  */
 
 var express = require('express');
-var request = require('request');
 var router = express.Router();
-var constPara = require('./constPara');
+let constPara = require('./constPara');
+var request = require('request');
 
-/* GET users listing. */
-router.post('/isUserValid', function(req, res, next) {
-    let name = req.body.name;
-    let password = req.body.password;
-    url = 'http://' + constPara.backEndUrl() + '/login/isUserValid';
-    request(url, (error, response, body) => {
-        if(!error && response.statusCode == 200) {
-            let isValid = body.query.isValid;
-            res.send({'isValid': isValid});
-        }
-    });
+router.get('/', function(req, res, next) {
+    res.sendfile('./public/login.html');
 });
+
+router.post('/isUserValid', function (req, res, next) {
+     let name = req.body.name;
+     let password = req.body.password;
+     url = 'http://' + constPara.backEndUrl() + '/login/isUserValid';
+     request({url: url, method: 'POST', form: {name: name, password: password}},
+         (error, response, body) => {
+         if (!error && response.statusCode == 200) {
+             let isValid = JSON.parse(body)['isValid'];
+             if (isValid == true) {
+                 req.session.name = name;
+                 req.session.password = password;
+             }
+             res.send({'isValid': isValid})
+         }
+     })
+})
 
 module.exports = router;
 
