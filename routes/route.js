@@ -1,9 +1,12 @@
+/**
+ * Created by RabbitLee on 01/01/2017.
+ */
+
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.sendfile('./views/test.html');
+    res.sendfile('./public/route.html');
 });
 
 module.exports = router;

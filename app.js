@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var redisStore = require('connect-redis');
+// var redisStore = require('connect-redis');
 
 
 var app = express();
@@ -24,16 +24,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     // store: new redisStore(),
     secret: 'recommand 128 bytes random string',
-    // cookie: {user: "default", maxAge: 2*60*60*0},
+    cookie: {user: "default", maxAge: 2*60*60*0},
     httpOnly: true,
     resave: true,
     saveUninitialized: true
 }));
 
 let test = require('./routes/test');
-app.use('/test', test);
+let index = require('./routes/index');
 let login = require('./routes/login');
+let personInfo = require('./routes/personInfo');
+let route = require('./routes/route');
+app.use('/test', test);
+app.use('/index', index);
 app.use('/login', login);
+app.use('/personInfo', personInfo);
+app.use('/route', route);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
