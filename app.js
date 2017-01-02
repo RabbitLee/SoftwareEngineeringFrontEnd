@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     // store: new redisStore(),
     secret: 'recommand 128 bytes random string',
-    cookie: {user: "default", maxAge: 2*60*60*0},
+    // cookie: {user: "default", maxAge: 2*60*60*0},
     httpOnly: true,
     resave: true,
     saveUninitialized: true
