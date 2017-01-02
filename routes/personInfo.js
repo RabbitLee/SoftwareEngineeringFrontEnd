@@ -6,7 +6,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.sendfile('./views/personInfo.html');
+    res.sendfile('./public/personInfo.html');
 });
 
 module.exports = router;

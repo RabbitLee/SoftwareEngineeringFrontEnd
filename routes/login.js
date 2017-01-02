@@ -19,10 +19,14 @@ router.post('/isUserValid', function (req, res, next) {
          (error, response, body) => {
          if (!error && response.statusCode == 200) {
              let isValid = JSON.parse(body)['isValid'];
+             // console.log('before:');
+             // console.log(req.session.name);
              if (isValid == true) {
                  req.session.name = name;
                  req.session.password = password;
              }
+             console.log('after:');
+             console.log(req.session.name);
              res.send({'isValid': isValid})
          }
      })
