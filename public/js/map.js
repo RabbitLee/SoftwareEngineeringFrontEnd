@@ -21,7 +21,7 @@ var cur_color = '#d0104c';
 function getSpot(city) {
     var spotArr;
     $.ajax({
-        url: 'http://rabbitlee.me/getAllSpots',
+        url: '/getAllSpots',
         data: city,
         type: 'post',
         async: false, //同步
@@ -201,7 +201,7 @@ function postPlan() {
     //
     // )
      $.ajax({
-        url: 'http://rabbitlee.me/submitSelectedSpots',
+        url: '/submitSelectedSpots',
         data: {
             "start_date": dpd1,
             "end_date": dpd2,

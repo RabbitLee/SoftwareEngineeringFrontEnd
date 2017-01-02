@@ -60,7 +60,7 @@ function changeCity(prov_value){  //选中省份的时候触发城市
 function getProvice() {
     var provinceArr;
     $.ajax({
-        url: 'http://rabbitlee.me/getAllProvinces',
+        url: '/getAllProvinces',
         data: null,
         type: 'post',
         async: false, //同步
@@ -74,10 +74,11 @@ function getProvice() {
     });
     return provinceArr;
 }
+
 function getCity(province) {
     var cityArr;
     $.ajax({
-        url: 'http://rabbitlee.me/getAllCities',
+        url: '/getAllCities',
         data: province,
         type: 'post',
         async: false, //同步
