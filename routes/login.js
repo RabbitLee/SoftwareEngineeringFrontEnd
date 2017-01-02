@@ -25,9 +25,9 @@ router.post('/isUserValid', function (req, res, next) {
                  req.session.name = name;
                  req.session.password = password;
              }
-             console.log('after:');
-             console.log(req.session.name);
-             res.send({'isValid': isValid})
+             // console.log('after:');
+             // console.log(req.session.name);
+             res.send({'isValid': isValid});
          }
      })
 })

@@ -35,11 +35,15 @@ let index = require('./routes/index');
 let login = require('./routes/login');
 let personInfo = require('./routes/personInfo');
 let route = require('./routes/route');
+let register = require('./routes/register');
+let selectSpots = require('./routes/selectSpots');
 app.use('/test', test);
 app.use('/index', index);
 app.use('/login', login);
 app.use('/personInfo', personInfo);
 app.use('/route', route);
+app.use('/register', register);
+app.use('/selectSpots', selectSpots);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
