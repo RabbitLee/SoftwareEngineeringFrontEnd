@@ -11,10 +11,10 @@ This is a <p>index</p>
 <script>
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/login/isUserValid",
+        url: "http://localhost:5000/selectSpots/getAllSpots",
+//        url: "http://localhost:3000/selectSpots/getAllCities",
         data: {
-            name: "李逸超",
-            password: "lyc"
+            provinceName: '江苏'
         },
         success: function (data) {
             console.log(data);
