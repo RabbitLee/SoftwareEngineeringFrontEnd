@@ -27,11 +27,11 @@
     <span class="nav-on"><i></i><i></i><i></i></span>
     <div class="navbar-brand" href="#">这是一个logo</div>
     <ul class = "navbar">
-        <li><a href="login.html" class="signIn item-anchor"><i class="fa fa-user-circle user-icon"></i>登录/注册</a></li>
+        <li><a href='<%= whetherLoginHref %>' class="signIn item-anchor"><i class="fa fa-user-circle user-icon"></i><%= whetherLogin %></a></li>
         <li><a href="#" class="discover item-anchor">发现</a></li>
         <li><a href="#" class="team item-anchor">拼团</a></li>
-        <li><a href="route.html" class="start item-anchor">开始规划</a></li>
-        <li><a href="index.html" class="index item-anchor">首页</a></li>
+        <li><a href="/route" class="start item-anchor">开始规划</a></li>
+        <li><a href="/index" class="index item-anchor">首页</a></li>
     </ul>
 </div>
 
@@ -41,24 +41,24 @@
 
 <div class="content" >
     <!--<div class="left-container" >-->
-        <!--<div class="wrapper">-->
-            <!--<h1>自定义您的旅行计划 指南</h1>-->
-            <!--<div class="subtitle">选择您计划的出行时段</div>-->
-            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
-            <!--<div class="subtitle">选择您的目的城市</div>-->
-            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
-            <!--<div class="subtitle">在地图中查看景点</div>-->
-            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
-            <!--<div class="subtitle">红色景点为推荐景点，蓝色为普通景点</div>-->
-            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
-            <!--<div class="subtitle">点击景点，查看详细信息，<br>添加到选择景点列表中</div>-->
-            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
-            <!--<div class="subtitle">您选择的景点将显示在地图上方</div>-->
-            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
-            <!--<div class="subtitle">点击列表中相应景点还可移除</div>-->
-            <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
-            <!--<div class="subtitle">现在可以提交您的计划啦</div>-->
-        <!--</div>-->
+    <!--<div class="wrapper">-->
+    <!--<h1>自定义您的旅行计划 指南</h1>-->
+    <!--<div class="subtitle">选择您计划的出行时段</div>-->
+    <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+    <!--<div class="subtitle">选择您的目的城市</div>-->
+    <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+    <!--<div class="subtitle">在地图中查看景点</div>-->
+    <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+    <!--<div class="subtitle">红色景点为推荐景点，蓝色为普通景点</div>-->
+    <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+    <!--<div class="subtitle">点击景点，查看详细信息，<br>添加到选择景点列表中</div>-->
+    <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+    <!--<div class="subtitle">您选择的景点将显示在地图上方</div>-->
+    <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+    <!--<div class="subtitle">点击列表中相应景点还可移除</div>-->
+    <!--<div class="arrowDown"><i class="fa fa-arrow-down"></i></div>-->
+    <!--<div class="subtitle">现在可以提交您的计划啦</div>-->
+    <!--</div>-->
     <!--</div>-->
     <div class="container">
         <form id="cityForm" name="cityForm" onsubmit="return postPlan()">
@@ -107,7 +107,7 @@
 <script src="js/index.js"></script>
 <script src="js/route.js"></script>
 <script src="js/map.js"></script>
-<script src="datePicker/js/foundation-datepicker.js"></script>
+<script src="datePicker/js/foundation-datepicker.js"></script>jj
 <script src="datePicker/js/locales/foundation-datepicker.zh-CN.js"></script>
 <script type="text/javascript" src="http://webapi.amap.com/demos/js/liteToolbar.js"></script>
 <script>

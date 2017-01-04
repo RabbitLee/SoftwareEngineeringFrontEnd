@@ -21,8 +21,10 @@ var cur_color = '#d0104c';
 function getSpot(city) {
     var spotArr;
     $.ajax({
-        url: '/getAllSpots',
-        data: city,
+        url: 'selectSpots/getAllSpots',
+        data: {
+            cityName: city
+        },
         type: 'post',
         async: false, //同步
         dataType: 'json',
@@ -111,9 +113,9 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
 
     if(city_value!="")
     {
-        // var spotArr = getSpot(city_value);
-        var spotArr = [{"names": "五角场", "id":"a", "visit_time":60,"coordinate":[121.507891, 31.28795],"levle":0},
-            {"names": "复旦", "id":"b", "visit_time":30,"coordinate":[121.5109710000, 31.2889600000],"levle":1}];//test
+        var spotArr = getSpot(city_value);
+        // var spotArr = [{"names": "五角场", "id":"a", "visit_time":60,"coordinate":[121.507891, 31.28795],"levle":0},
+        //     {"names": "复旦", "id":"b", "visit_time":30,"coordinate":[121.5109710000, 31.2889600000],"levle":1}];//test
 
         var lnglats = [],
             spotName = [],
