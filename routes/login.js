@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/isUserValid', function (req, res, next) {
+     console.log(req.body);
      let name = req.body.name;
      let password = req.body.password;
      url = 'http://' + constPara.backEndUrl() + '/login/isUserValid';

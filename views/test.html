@@ -11,10 +11,14 @@ This is a <p>index</p>
 <script>
     $.ajax({
         type: "POST",
-        url: "http://localhost:5000/selectSpots/getAllSpots",
-//        url: "http://localhost:3000/selectSpots/getAllCities",
+//        url: "http://rabbitlee.me/selectSpots/getAllSpots",
+        url: "selectSpots/getAllSpots",
+//        url: '/login/isUserValid',
+//        url: 'http://rabbitlee.me:5000/login/isUserValid',
         data: {
-            provinceName: '江苏'
+//            name: 'admin',
+//            password: 'admin'
+            cityName: '上海'
         },
         success: function (data) {
             console.log(data);
