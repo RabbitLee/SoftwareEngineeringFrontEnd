@@ -60,7 +60,7 @@ function changeCity(prov_value){  //选中省份的时候触发城市
 function getProvice() {
     var provinceArr;
     $.ajax({
-        url: 'selectSpots/getAllProvinces',
+        url: '/selectSpots/getAllProvinces',
         data: null,
         type: 'post',
         async: false, //同步
@@ -78,7 +78,7 @@ function getProvice() {
 function getCity(province) {
     var cityArr;
     $.ajax({
-        url: 'selectSpots/getAllCities',
+        url: '/selectSpots/getAllCities',
         data: {
             provinceName: province
         },

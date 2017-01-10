@@ -37,6 +37,9 @@ let personInfo = require('./routes/personInfo');
 let route = require('./routes/route');
 let register = require('./routes/register');
 let selectSpots = require('./routes/selectSpots');
+let square = require('./routes/square');
+let agencySquare = require('./routes/agencySquare');
+let agencyCenter = require('./routes/agencyCenter');
 app.use('/test', test);
 app.use('/index', index);
 app.use('/login', login);
@@ -44,7 +47,9 @@ app.use('/personInfo', personInfo);
 app.use('/route', route);
 app.use('/register', register);
 app.use('/selectSpots', selectSpots);
-
+app.use('/square', square);
+app.use('/agencySquare', agencySquare);
+app.use('/agencyCenter', agencyCenter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

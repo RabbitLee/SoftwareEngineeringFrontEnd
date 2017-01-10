@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>agency login in</title>
+    <link href="css/login.css" rel="stylesheet" type="text/css"/>
+    <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+    <link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-3.1.0.min.js"></script>
+
+
+</head>
+<body>
+<div class="container">
+    <section>
+        <div id="sign-form" >
+            <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+            <a class="hiddenanchor" id="toregister"></a>
+            <a class="hiddenanchor" id="tologin"></a>
+            <div id="wrapper">
+                <div id="login" class="animate form">
+                    <form  id="signIn-form" method="get" action="/agencySquare" autocomplete="on" onsubmit="return Agencycheck()">
+                        <h1><i class="fa fa-paper-plane"></i> 登录</h1>
+                        <label id="signIninfo"></label>
+                        <p>
+                            <label for="username" class="uname" data-icon="u" >用户名</label>
+                            <input id="username" name="username" required="required" type="text" placeholder="输入账号名称"/>
+                            <label id="usernameinfo"></label>
+                        </p>
+                        <p>
+                            <label for="password" class="youpasswd" data-icon="p">密码</label>
+                            <input id="password" name="password" required="required" type="password" placeholder="输入密码" />
+                            <label id="passwordinfo"></label>
+                        </p>
+
+                        <p class="login button">
+                            <input type="submit" value="登录" />
+                        </p>
+                        <p class="change_link">
+                            <a href="/index" class="back">返回首页</a>
+                            还没有账号？
+                            <a href="#" class="to_register">联系我们</a>
+                        </p>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</div>
+<script src="js/login.js"></script>
+</body>
+</html>

@@ -150,11 +150,11 @@ body{
     width: 30%;
     letter-spacing: 1px;
     vertical-align: middle;
-    color: #268785;
+    color: #00aa90;
 
 }
 #cityForm label{
-    color: #268785;
+    color: #263238;
     font-weight: bold;
     font-size: 120%;
 }
@@ -194,7 +194,7 @@ select option{
     margin-top: 10px;
     margin-bottom: 20px;
     float: left;
-    color: #268785;
+    color: #263238;
     font-weight: bold;
     font-size: 120%;
 
@@ -336,7 +336,7 @@ select option{
 }
 
 .routeWrapper{
-    color: #268785;
+    color: #00aa90;
     font-weight: bold;
     margin-left:15%;
     margin-top: 50px;
@@ -371,7 +371,7 @@ select option{
     width: 30%;
     letter-spacing: 1px;
     vertical-align: middle;
-    color: #268785;
+    color: #00aa90;
 
 }
 #RouteContainer{

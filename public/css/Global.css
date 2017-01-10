@@ -16,6 +16,8 @@
 }
 .nav ul{
     list-style: none;
+    margin-right: 50px;
+
 }
 .nav li {
     float: right;

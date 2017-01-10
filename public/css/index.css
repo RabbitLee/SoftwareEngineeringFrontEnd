@@ -5,6 +5,7 @@
     background: white;
     background-size:cover;
     background-position: center center;
+
 }
 .left-bar{
     color: #fff;
@@ -29,9 +30,9 @@
 }
 .right-bar .title{
 
-    font-family: Arial;
+    font-family: Helvetica;
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-align: center;
     line-height: 130px;
     font-size: 500%;
@@ -124,8 +125,8 @@
     border-radius: 8px 8px 8px 8px;
     margin-top: 50px;
     margin-right: 20%;
-    color: #00aa90;
-    background-color: #c2e8d8;
+    color: #fff;
+    background-color: #00695c;
 
 }
 .button-visitor{
@@ -146,8 +147,8 @@
     margin-left: 20%;
 }
 .button-visitor:hover{
-    color: #00aa90;
-    background-color: #c2e8d8;
+    color: #fff;
+    background-color: #00695c;
     transition:all .2s ease-in 0s;
 
 }
@@ -171,7 +172,7 @@
 }
 .button-angecy:hover{
     color: #fff;
-    background-color: #407f5d;
+    background-color: #00aa90;
     transition:all .2s ease-in 0s;
 }
 .curve1{
@@ -311,8 +312,89 @@
         transform: scale(.8) rotate(0.01deg);
     }
 }
+
+.white-bar{
+    position: relative;
+    text-align: center;
+    height: 150px;
+    width: 100%;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+.white-bar .title{
+    font-weight: bolder;
+    letter-spacing: 2px;
+    line-height: 110px;
+    font-size: 250%;
+    opacity: 0.8;
+    color: #263238;
+}
+.white-bar .subtitle{
+    line-height: 0px;
+    font-size: 150%;
+    color: #78909c;
+    letter-spacing: 2px;
+    opacity: 0.6;
+}
+.green-bar{
+    height: 300px;
+    width:100%;
+    text-align: center;
+    background-color: #b2dfdb;
+}
+.green-bar ul{
+    list-style: none;
+    margin-top: -20px;
+    /*width: 50%;*/
+    margin-left: 15%;
+    margin-right: 15%;
+}
+.green-bar li{
+    margin-top: 50px;
+    float: left;
+    width: 20%;
+}
+.green-bar li:nth-child(1){
+    margin-right: 20%;
+}
+.green-bar li:nth-child(2){
+    margin-right: 20%;
+}
+.green-bar i{
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 100px;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 500%;
+    /*color: #b2dfdb;*/
+    /*background-color: #fff;*/
+}
+.green-bar li p{
+    font-size: 120%;
+    color: #fff;
+    margin-top: 20px;
+    font-weight: lighter;
+}
+.green-bar li div{
+    color: #fff;
+    margin-top: -10px;
+    font-weight: lighter;
+
+}
+#visitor-content{
+    background-color:#2E2D3C;
+    height: 500px;
+    overflow-y: auto;
+}
 .content{
     height: 800px;
     width: 100%;
+
 }
 /*pop layer*/

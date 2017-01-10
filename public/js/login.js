@@ -98,7 +98,7 @@ function signUpCheck() {
     //验证手机号或邮箱是否已存在
     var isValid = false;
     $.ajax({
-        url: 'http://rabbitlee.me/isUserValid',
+        url: '/register/isUserValid',
         data: {
             "name": name,
             "email": email,
@@ -109,7 +109,7 @@ function signUpCheck() {
         async: false, //同步
         dataType: 'json',
         success: function (data) {
-            isValid = data;
+            isValid = data.isValid;
         },
         error: function () {
             alert("连接服务器验证失败！");
@@ -170,4 +170,46 @@ function checkName() {  //校验姓名
         return false;
     }
 
+}
+function Agencycheck(){
+    var password = document.getElementById("password").value;
+    var name = document.getElementById("username").value;
+    document.getElementById("passwordinfo").innerHTML = "";
+    document.getElementById("usernameinfo").innerHTML = "";
+
+    if(name == "") {
+        document.getElementById("usernameinfo").innerHTML = "用户名不能为空";
+        $("#usernameinfo").css({"color":"red","font-size":"80%"});
+        return false;
+    }
+    if(password == "") {
+        document.getElementById("passwordinfo").innerHTML = "密码不能为空";
+        $("#passwordinfo").css({"color":"red","font-size":"80%"});
+        return false;
+    }
+
+
+    $.ajax({
+        url: '/AgencyLogin/isUserValid',
+        data: {
+            "name": name,
+            "password": password,
+        },
+        type: 'post',
+        async: false, //同步
+        dataType: 'json',
+        success: function (data) {
+            isValid = data.isValid;
+
+        },
+        error: function () {
+            alert("连接服务器验证失败！");
+
+        }
+    });
+    if(!isValid){
+        document.getElementById("signIninfo").innerHTML = "用户名与密码不匹配";
+        $("#signIninfo").css({"color":"red","font-size":"80%"});
+        return isValid;
+    }
 }

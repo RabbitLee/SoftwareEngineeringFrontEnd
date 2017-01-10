@@ -3,31 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Index</title>
+    <title>Square</title>
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link href="css/Global.css" rel="stylesheet" type="text/css"/>
-    <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+    <link href="datePicker/css/foundation-datepicker.css" rel="stylesheet" type="text/css">
+    <link href="css/square.css" rel="stylesheet" type="text/css"/>
     <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
     <link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
-    <link href="css/edslider.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main.css?v=1.0"/>
+
 
     <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-paginator.min.js"></script>
     <script src="js/jquery.headroom.js"></script>
     <script src="js/headroom_0.7.0.js"></script>
 
+    <script type="text/javascript"
+            src="http://webapi.amap.com/maps?v=1.3&key=9ddd6a45bb2946d784a0c4bdd8bb5e15"></script>
 
-    <script src="js/snap.svg-min.js"></script>
-
-
-    <!--<script src="js/focusImage.js"></script>-->
-
-
-    <!--<script src="js/jquery.edslider.js"></script>-->
 </head>
 <body>
 <!--menu bar-->
-
-<div class="nav" id="nav">
+<div id="navbar" class="nav">
     <span class="nav-on"><i></i><i></i><i></i></span>
     <div class="navbar-brand" href="#">这是一个logo</div>
     <ul class = "navbar">
@@ -37,62 +36,67 @@
         <li><a href="/route" class="start item-anchor">开始规划</a></li>
         <li><a href="/index" class="index item-anchor">首页</a></li>
     </ul>
-
 </div>
 
-<div class = "focus-bar">
-    <div class = "left-bar">
-        <img src="images/curve1.png" class="curve1">
-        <img src="images/curve2.png" class="curve2">
-        <img src="images/curve3.png" class="curve3">
-        <img src="images/curve4.png" class="curve4">
-        <img src="images/shadow.png" class="shadow">
-        <img src="images/plane.png" id = "paper-plane" class="plane float">
+<div class = "head-bar" id="head-bar">
+    <div><i class="fa fa-heartbeat"></i> 发现 , 心动的旅程</div>
+</div>
+
+<div class="content" >
+    <div class="container">
+        <div class="square-container">
+
+            <p class="plan-title"><b></b><span>所有路线列表</span><b></b></p>
+            <div id="list"><table id="data_table" class="table">
+                    <thead>
+                    <tr>
+                        <th>创建者</th>
+                        <th>开始日期</th>
+                        <th>结束日期</th>
+                        <th>目的城市</th>
+                        <th>开始景点</th>
+                        <th>结束景点</th>
+                        <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="page-container">
+                <div id="page"></div>
+            </div>
+
+        </div>
+
     </div>
-    <div class="right-bar">
-        <div class = "title" >iTravel</div>
-        <div class="title1">简单 + 智能，让出游更迅速</div>
-        <div class="sub-title">为喜欢旅行的您定制一条专属旅游路线，智能化设计，致力于更自由化的旅行，同时可选择一人独行或是与志同道合的TA一起拼团出游。</div>
-        <div class="button-visitor">游客入口</div>
-        <a href="agencyLogin.html" style="text-decoration: none"><div class="button-angecy">旅行社竞价</div></a>
+</div>
+
+<div id="RouteContent">
+    <div class="routeWrapper">
+        <p class="plan-title"><b></b><span>详细路线信息 <i class="fa fa-calendar-check-o"></i></span><b></b></p>
+        <div id="dateLabel"></div>
+        <div id="cityLabel"></div><br>
+        <div id="creatorLabel"></div>
+        <div id="othersLabel"></div>
+        <div id="routeLabel"></div>
+        <div id="RouteContainer" style="position: static; width:90%; height:600px" ></div>
+        <div id="vote" class="vote-container">
+            候选旅行社：<br><br>
+            <div id="agencyLabel"></div>
+        </div>
+        <button id="joinRoute" onclick="joinRoute()" type="button">加入</button>
+        <button id="voteFor" onclick="voteFor()" type="button">投票</button>
+        <div id="voteinfo"></div>
     </div>
 
 </div>
-<div class="white-bar"><div class="title">你好， 这是iTravel</div><div class="subtitle">无忧，无虑，无繁琐， 只有妙不可言</div></div>
-<div class="green-bar">
-    <ul>
-        <li> <i class="fa fa-heart"></i>
-            <p>满足个人喜好</p>
-            <div>喜欢什么，设计什么，一键开启您的旅行</div>
-        </li>
-        <li> <i class="fa fa-thumbs-o-up"></i>
-            <p>寻求优雅设计</p>
-            <div>建立一个公共广场，在这里您可以找到符合您心意的路线设计</div>
-        </li>
-        <li> <i class="fa fa-rocket"></i>
-            <p>极速制定路线</p>
-            <div>马上选择旅行目标，极速生成路线，与朋友分享</div>
-        </li>
-    </ul>
-</div>
-<div id="visitor-content">
-
-</div>
-<div class="content">
-
-</div>
 
 
-<!--headroom-->
+
+
+<script src="js/square.js"></script>
 <script src="js/index.js"></script>
-<script src="js/scrollTo.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="http://webapi.amap.com/demos/js/liteToolbar.js"></script>
 
-    $(".button-visitor").click(function(){
-        $.scrollTo('#visitor-content',500);
-    });
-
-</script>
 <div class="footBg"></div>
 <footer>
     <div class="top">
@@ -120,7 +124,6 @@
             <li><a href="#">FAQ</a></li>
         </ul>
     </div>
-    <hr>
     <div class="bottom">
         <br>
         Designed and built with all the love in the world by a shaky team.<br>

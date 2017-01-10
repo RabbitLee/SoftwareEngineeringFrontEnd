@@ -21,7 +21,7 @@ var cur_color = '#d0104c';
 function getSpot(city) {
     var spotArr;
     $.ajax({
-        url: 'selectSpots/getAllSpots',
+        url: '/selectSpots/getAllSpots',
         data: {
             cityName: city
         },
@@ -203,7 +203,7 @@ function postPlan() {
     //
     // )
      $.ajax({
-        url: '/submitSelectedSpots',
+        url: '/selectSpots/submitSelectedSpots',
         data: {
             "start_date": dpd1,
             "end_date": dpd2,
@@ -297,7 +297,7 @@ function postPlan() {
 
         }
     });
-    window.location.href = "#navbar";
+    window.location.href = "#head-bar";
     return false;
 
 
@@ -332,7 +332,11 @@ function loadTransfer(start,destination) {
     });
 }
 
-
+function reChoose() {
+    $("#RouteContent").hide();
+    $(".content").show();
+    window.location.href = "#head-bar";
+}
 //
 // AMap.service(["AMap.Transfer"], function() {
 //     var transOptions = {
