@@ -3,19 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Index</title>
+    <title>PersonInfo</title>
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link href="css/Global.css" rel="stylesheet" type="text/css"/>
-    <link href="css/personInfo.css" rel="stylesheet" type="text/css"/>
+    <link href="css/square.css" rel="stylesheet" type="text/css"/>
     <link href="css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
     <link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
     <link href="css/personInfo.css" rel="stylesheet" type="text/css"/>
 
+
     <script src="js/jquery-3.1.0.min.js"></script>
+
     <script src="js/jquery.headroom.js"></script>
+
     <script src="js/headroom_0.7.0.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-paginator.min.js"></script>
 
 
+    <script type="text/javascript"
+            src="http://webapi.amap.com/maps?v=1.3&key=9ddd6a45bb2946d784a0c4bdd8bb5e15"></script>
 </head>
 <body>
 <!--menu bar-->
@@ -25,94 +32,79 @@
     <ul class = "navbar">
         <li><a href='<%= whetherLoginHref %>' class="signIn item-anchor"><i class="fa fa-user-circle user-icon"></i><%= whetherLogin %></a></li>
         <!--<li><a href="#" class="discover item-anchor">发现</a></li>-->
-        <li><a href="/square" class="team item-anchor">广场</a></li>
-        <li><a href="/route" class="start item-anchor">开始规划</a></li>
+        <li><a href="/agencySquare" class="team item-anchor">竞价广场</a></li>
+        <!--<li><a href="/route" class="start item-anchor">开始规划</a></li>-->
         <li><a href="/index" class="index item-anchor">首页</a></li>
     </ul>
 
 </div>
 
-<div class = "focus-bar">
+<div class = "focus-bar" id="#head-bar">
     <div class="title"><i class="fa fa-user-circle"></i> 个人中心</div>
 </div>
-<div class="content">
+<div class="tab-container">
     <div class="tabs-vertical">
 
         <ul id="tab-nav">
             <li>
                 <a class="tab-active nav-button" data-index="0" href="#">我的路线</a>
             </li>
-            <li>
-                <a class="nav-button" data-index="1" href="#">我的旅行团</a>
-            </li>
-            <li>
-                <a class="nav-button" data-index="2" href="#">我的游记</a>
-            </li>
-            <li>
-                <a class="nav-button" data-index="3" href="#">我的付款</a>
-            </li>
-            <li>
-                <a class="nav-button" data-index="4" href="#">个人设置</a>
-            </li>
         </ul>
 
         <div class="tabs-content-placeholder">
 
             <section class="tab-content-active" id="getRoute">
+                <h1>我接包的路线</h1>
+                <div class="content" >
+                    <div class="container">
+                        <div class="square-container">
+                            <div id="list"><table id="data_table" class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>创建者</th>
+                                        <th>开始日期</th>
+                                        <th>结束日期</th>
+                                        <th>目的城市</th>
+                                        <th>开始景点</th>
+                                        <th>结束景点</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
 
-            </section>
 
-            <section>
-                <p>Tabs Information 2</p>
-                <img src="images/loginBg.png" alt="Colosseum">
-            </section>
+                        </div>
+                        <div class="page-container">
+                            <div id="page"></div>
+                        </div>
 
-            <section>
-                <p>Tabs Information 2</p>
-                <img src="images/loginBg.png" alt="Sahale Wa">
-            </section>
-            <section>
-                <p>Tabs Information 2</p>
-                <div class="s3 "></div>
-            </section>
-
-            <section class="setting">
-                <div class="setting-form">
-                    <form  id="setting-form" method="post" action="#" autocomplete="on" onsubmit="return settingCheck()">
-                        <h1>更改个人信息</h1>
-                        <p>
-                            <label for="usernamesignup" class="icon icon-user">用户名</label>
-                            <input id="usernamesignup" name="usernamesignup" required="required" type="text"  />
-                            <label id="usernameSignup-info"></label>
-                        </p>
-                        <p>
-                            <label for="emailsignup" class="icon icon-mail"  >电子邮箱</label>
-                            <input id="emailsignup" name="emailsignup" required="required" type="email" onblur="checkEmail();" placeholder="输入已有电子邮箱"/>
-                            <label id="emailinfo"></label>
-                        </p>
-                        <p>
-                            <label for="telesignup" class="icon icon-phone" >手机</label>
-                            <input id="telesignup" name="telesignup" required="required" type="text" onblur="checkEmail();" placeholder="输入手机号码"/>
-                            <label id="teleinfo"></label>
-                        </p>
-                        <p>
-                            <label for="passwordsignup" class="icon icon-lock" >密码 </label>
-                            <input id="passwordsignup" name="passwordsignup" required="required" type="password" onblur="checkPassword();" placeholder="输入密码"/>
-                            <label id="passwordSignup-info"></label>
-                        </p>
-                        <p>
-                            <label for="passwordsignup_confirm" class="icon icon-lock" >确认密码 </label>
-                            <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" onblur="checkRepassword();" placeholder="再次输入密码"/>
-                            <label id="repasswordinfo"></label>
-                        </p>
-                        <p class="change button">
-                            <input type="submit" value="更改"/>
-                        </p>
-                    </form>
+                    </div>
                 </div>
 
-                <div class="setting-image">
-                    <img src="images/settingImg.png">
+                <div id="RouteContent">
+                    <div class="routeWrapper">
+                        <p class="plan-title"><b></b><span>详细路线信息 <i class="fa fa-calendar-check-o"></i></span><b></b></p>
+                        <div id="dateLabel"></div>
+                        <div id="cityLabel"></div><br>
+                        <div id="creatorLabel"></div>
+                        <div id="othersLabel"></div>
+                        <div id="routeLabel"></div>
+                        <div id="RouteContainer" style="position: static; width:90%; height:600px" ></div>
+                        <div id="vote" class="vote-container">
+                            已竞价旅行社：<br><br>
+                            <div id="agencyLabel"></div>
+                        </div>
+                        <div class="bid-container">
+                            <label>您的出价:  </label>
+                            <input id="money" name="money" required="required" type="text" placeholder="输入金额">
+
+                            </input><i class="fa fa-jpy"></i>
+                        </div>
+                        <button id="bid" onclick="bid()" type="button">修改出价</button>
+                        <button id="backAll" onclick="backAll()" type="button">返回</button>
+                    </div>
+
                 </div>
             </section>
 
@@ -123,7 +115,7 @@
 
 <!--headroom-->
 <script src="js/index.js"></script>
-<script src="js/personInfo.js"></script>
+<script src="js/AgencyCenter.js"></script>
 <div class="footBg"></div>
 <footer>
     <div class="top">
