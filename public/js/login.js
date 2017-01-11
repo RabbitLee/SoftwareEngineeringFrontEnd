@@ -98,11 +98,11 @@ function signUpCheck() {
     //验证手机号或邮箱是否已存在
     var isValid = false;
     $.ajax({
-        url: 'http://rabbitlee.me/isUserValid',
+        url: '/register/',
         data: {
             "name": name,
             "email": email,
-            "telephone": telephone,
+            "phone": telephone,
             "password": password,
         },
         type: 'post',
