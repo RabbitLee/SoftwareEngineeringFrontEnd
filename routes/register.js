@@ -13,7 +13,7 @@ router.post('/', function(req, res, next) {
     let email = req.body.email;
     let phone = req.body.phone;
     url = "http://" + constPara.backEndUrl() + '/register/';
-    request({url: url, method: 'POST', form: {name: name, password: password, email: email, phone}},
+    request({url: url, method: 'POST', form: {name: name, password: password, email: email, phone: phone}},
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let isValid = JSON.parse(body)['isValid'];
