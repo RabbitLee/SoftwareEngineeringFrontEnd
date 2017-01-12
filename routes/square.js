@@ -21,18 +21,19 @@ router.get('/', function(req, res, next) {
     res.render('../public/square', {whetherLogin: whetherLogin, whetherLoginHref: whetherLoginHref});
 });
 
-router.post('/', function (req, res, next) {
+router.post('/showRouteInPage', function (req, res, next) {
+    let page = req.body.page;
     url = 'http://' + constPara.backEndUrl() + '/square/showAllRoute';
     request({url: url, method: 'POST'},
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
-                let allRoute = JSON.parse(body);
-                res.send(allRoute);
+                let allRoute = JSON.parse(body)['list'];
+
             }
         })
 })
 
-router.post('/', function (req, res, next) {
+router.post('/getSelectedRoute', function (req, res, next) {
     let detailedRouteID = req.body.datailedRouteID;
     url = 'http://' + constPara.backEndUrl() + '/square/getSelectedRoute';
     request({url: url, method: 'POST', form: {detailedRouteID: detailedRouteID}},
@@ -57,7 +58,7 @@ router.post('/', function (req, res, next) {
         })
 })
 
-router.post('/', function (req, res, next) {
+router.post('/joinRoute', function (req, res, next) {
     let user = req.session.name;
     let voteFor = req.body.voteDor;
     url = 'http://' + constPara.backEndUrl() + '/square/joinRoute';
@@ -70,7 +71,7 @@ router.post('/', function (req, res, next) {
         })
 })
 
-router.post('/', function (req, res, next) {
+router.post('/bidForRoute', function (req, res, next) {
     let agency = req.session.name;
     let bidFor = req.body.bidFor;
     let fare = req.body.fare;
