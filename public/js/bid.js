@@ -4,10 +4,10 @@
 var voteFlag  = 0;
 $(function () {
     $.ajax({
-        url: "/square/showAllRoute",
+        url: "/square/showRouteInPage",
         datatype: 'json',
         type: "post",
-        data: null,
+        data: 1,
         success: function (data) {
 
         },
@@ -64,10 +64,10 @@ $(function () {
                     //点击事件，用于通过Ajax来刷新整个list列表
                     onPageClicked: function (event, originalEvent, type, page) {
                         $.ajax({
-                            url: "/square/showAllRoute?id=" + page,
+                            url: "/square/sshowRouteInPage",
                             type: "post",
-                            data: "page=" + page,
-                            success: function (data1) {
+                            data: page,
+                            success: function (data) {
 
                             },
                             error: function () {

@@ -4,10 +4,10 @@
 var voteFlag  = 0;
 $(function () {
     $.ajax({
-        url: "/square/showAllRoute",
+        url: "/square/showRouteInPage",
         datatype: 'json',
         type: "post",
-        data: null,
+        data: 1,
         success: function (data) {
 
         },
@@ -64,10 +64,10 @@ $(function () {
                     //点击事件，用于通过Ajax来刷新整个list列表
                     onPageClicked: function (event, originalEvent, type, page) {
                         $.ajax({
-                            url: "/square/showAllRoute?id=" + page,
+                            url: "/square/showRouteInPage",
                             type: "post",
-                            data: "page=" + page,
-                            success: function (data1) {
+                            data: page,
+                            success: function (data) {
 
                             },
                             error: function () {
@@ -313,7 +313,7 @@ function joinRoute() {
         url: '/square/joinRoute',
         data: {
             //user:
-            routeid: myRoute.routeId
+            detailRouteID: myRoute.routeId
         },
         type: 'post',
         async: false, //同步
@@ -338,7 +338,8 @@ function voteFor() {
             url: '/square/voteRoute',
             data: {
                 //user:
-                voteFor: $("input[name='vote']:checked").val()
+                voteFor: $("input[name='vote']:checked").val(),
+                detailRouteID: myRoute.routeId
             },
             type: 'post',
             async: false, //同步
