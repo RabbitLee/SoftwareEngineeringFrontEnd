@@ -6,16 +6,16 @@ function animate() {
         $('#paper-plane').addClass('plane float').removeClass('flyaway ' + 'pushOut');
     });
 };
-
-$(document).ready(function() {
-    $('.mySlideshow').edslider({
-        width : '100%',
-        height: 700,
-        progress: false,
-        interval: 4000,
-    });
-
-});
+//
+// $(document).ready(function() {
+//     $('.mySlideshow').edslider({
+//         width : '100%',
+//         height: 700,
+//         progress: false,
+//         interval: 4000,
+//     });
+//
+// });
 
 //headroom
 $(function() {

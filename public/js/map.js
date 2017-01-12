@@ -29,7 +29,7 @@ function getSpot(city) {
         async: false, //同步
         dataType: 'json',
         success: function (data) {
-            spotArr = data;
+            spotArr = data.spots;
         },
         error: function () {
             alert("获取景点数据失败！");
@@ -92,7 +92,7 @@ function removeByValue(arr, val) {
 }
 
 function changeSpot(city_value){ //更改城市时触发的函数，生成新的坐标点
-
+    map.clearMap();
     if(addSpotList.length > 0)
     {
         if(confirm("每次只能选择一个城市哦~确定要重新选择并清空已选景点吗:）"))
@@ -114,6 +114,7 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
     if(city_value!="")
     {
         var spotArr = getSpot(city_value);
+
         // var spotArr = [{"names": "五角场", "id":"a", "visit_time":60,"coordinate":[121.507891, 31.28795],"levle":0},
         //     {"names": "复旦", "id":"b", "visit_time":30,"coordinate":[121.5109710000, 31.2889600000],"levle":1}];//test
 
@@ -122,12 +123,14 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
             visitTime = [],
             spotId = [],
             spotLevel = [];
+
         $.each(spotArr, function(i,val){
             lnglats.push(val.coordinate);
-            spotName.push(val.names);
+            spotName.push(val.name);
             visitTime.push(val.visit_time);
             spotId.push(val.id);
-            spotLevel.push(val.levle);
+            spotLevel.push(val.level);
+
         });
         // var lnglats=[//也可以使用LngLat对象
         //     [121.507891, 31.28795], [121.5109710000, 31.2889600000]
@@ -152,7 +155,7 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
             }
 
             marker = new AMap.Marker({
-                position:lnglats[i],
+                position:lnglats[i][0],
                 map:map,
                 icon: icon,
             });
