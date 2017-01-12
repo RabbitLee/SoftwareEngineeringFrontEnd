@@ -128,7 +128,7 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
             lnglats.push(val.coordinate);
             spotName.push(val.name);
             visitTime.push(val.visit_time);
-            spotId.push(val.id);
+            spotId.push(val.spotid);
             spotLevel.push(val.level);
 
         });
