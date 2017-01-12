@@ -1,4 +1,6 @@
-
+body{
+    font-family: Arial;
+}
 .nav {
     position: fixed;
     left: 0;
@@ -301,10 +303,13 @@
 }
 
 footer{
+    position: relative;
     text-align: center;
     color:#fff;
     background-color: #00796b;
-
+    -webkit-box-shadow: -1px -1px 3px rgba(0,0,0,0.2);
+    -moz-box-shadow: -1px -1px 3px rgba(0,0,0,0.2);
+    box-shadow: -1px -1px 3px rgba(0,0,0,0.5);
 }
 .top{
     height: 250px;

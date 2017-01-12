@@ -51,7 +51,7 @@
     </div>
     <div class="right-bar">
         <div class = "title" >iTravel</div>
-        <div class="title1">简单 + 智能，让出游更迅速</div>
+        <div class="title1">简单 + 智能，让自游更自由</div>
         <div class="sub-title">为喜欢旅行的您定制一条专属旅游路线，智能化设计，致力于更自由化的旅行，同时可选择一人独行或是与志同道合的TA一起拼团出游。</div>
         <div class="button-visitor">游客入口</div>
         <a href="agencyLogin.html" style="text-decoration: none"><div class="button-angecy">旅行社竞价</div></a>
@@ -76,24 +76,77 @@
     </ul>
 </div>
 <div id="visitor-content">
+    <div class="container">
+        <div class="title"><span class="first-letter">规</span>划路线</div>
+        <div class="subtitle">　　在这里，您可以自定义旅游路线，选择自己心仪的城市景点，我们将为您智能化的规划路线，设计出一条最优路径。对路线满意您可以保存路线到自己的路线中，在用户在中心随时查看，还可选择分享到广场中，寻找旅行社接包，弹性设计，满足您的需求。
+        </div><button class="btn-routePlan" onclick="window.location.href='/route'">由此进入  <i class="fa fa-angle-double-right"></i></button>
 
+        <div class="image-container">
+            <img src="images/scenery1.png">
+            <img src="images/scenery2.png">
+            <img src="images/scenery3.png">
+        </div>
+    </div>
 </div>
-<div class="content">
+<div class="black-bar">
+    <ul>
+        <li>  <p>233</p>
+            <hr>
+            <div>覆盖景点数</div>
+        </li>
+        <li>
+            <p>2736</p>
+            <hr>
+            <div>制定路线数</div>
+        </li>
 
+        <li>  <p>390</p>
+            <hr>
+            <div>旅行团接团数</div>
+        </li>
+        <li>  <p>980</p>
+            <hr>
+            <div>满意用户数</div>
+        </li>
+    </ul>
 </div>
+<div id="square-content">
+    <div class="container">
+        <div class="title"><span class="first-letter">寻</span>找路线</div>
+        <div class="subtitle">　　在这里，您可以在路线广场中寻找心仪的路线设计，发现别人创建的路线，找到志同道合的游客，选择适合的旅行团接包，自己做主谁接包，稳定又安心。
+        </div><button class="btn-square" onclick="window.location.href='/square'">由此进入  <i class="fa fa-angle-double-right"></i></button>
+
+    </div>
+</div>
+<div class="black-bar">
+   <div class="green-content"><i class="fa fa-quote-left"></i>&nbsp;你的托付，<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;妥了再付&nbsp;<i class="fa fa-quote-right"></i></div>
+</div>
+<div id="bid-content">
+    <div class="container">
+        <div class="title"><span class="first-letter">旅</span>行社竞价</div>
+        <div class="subtitle">　　我们与多家优质旅行社合作，提供平台给旅行社竞价，当每条路线的用户达成一致同意，即成团让旅行团接包, 用户付款。如果您想成为我们的合作伙伴，可以通过网站底部链接联系我们。
+        </div>
+        <img src="images/bid.png">
+
+    </div>
+</div>
+
 
 
 <!--headroom-->
+
 <script src="js/index.js"></script>
 <script src="js/scrollTo.min.js"></script>
+
 <script type="text/javascript">
 
     $(".button-visitor").click(function(){
         $.scrollTo('#visitor-content',500);
     });
 
+
 </script>
-<div class="footBg"></div>
+
 <footer>
     <div class="top">
         <ul class="column-1">
@@ -106,10 +159,10 @@
         <hr>
         <ul class="column-2">
             <li style="font-weight: bold; font-size: 120%; color: #a5dee4">快速链接</li>
-            <li><a href="#">主页</a></li>
-            <li><a href="#">规划路线</a></li>
-            <li><a href="#">拼团</a></li>
-            <li><a href="#">发现</a></li>
+            <li><a href="/index">主页</a></li>
+            <li><a href="/route">规划路线</a></li>
+            <li><a href="/square">拼团</a></li>
+
         </ul>
         <hr>
         <ul class="column-3">

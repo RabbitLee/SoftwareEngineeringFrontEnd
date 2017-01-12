@@ -328,3 +328,10 @@ function clearLastScene() {
     $("#routeLabel").empty();
     $('#agencyLabel').empty();
 }
+
+
+function backAll() {
+    $("#RouteContent").hide();
+    $(".content").show();
+    window.location.href = "#head-bar";
+}

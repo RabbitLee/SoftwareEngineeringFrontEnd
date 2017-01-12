@@ -19,17 +19,16 @@ body{
     color: #fff;
     line-height: 250px;
 }
-.content {
-
+.tab-container {
+    width: 100%;
 }
 
 .tabs-vertical {
-    width: 1000px;
     background-color: #4ba7a4;
     box-shadow:  2px 2px 3px #E8E8E8;
     border: 1px solid transparent;
-    margin: 30px auto 30px;
-    width: 1200px;
+    margin: 30px 15% 30px;
+    width: 70%;
     text-align: center;
     border-radius: 2px;
 
@@ -37,7 +36,7 @@ body{
 
 /* The tabs */
 
-.tabs-vertical ul {
+.tabs-vertical #tab-nav {
     float: left;
     list-style: none;
     text-align: left;
@@ -298,4 +297,488 @@ p.change.button{
     width: 100%;
     background-color: #2E2D3C;
     height: 500px;
+}
+
+#getRoute .container{
+    width:90%;
+    margin-left:5%;
+    margin-top: 50px;
+    margin-bottom:200px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 50px 0 0 50px;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    overflow-x: auto;
+}
+
+
+#getRoute .routeWrapper{
+    color: #00aa90;
+    font-weight: bold;
+    margin-left:5%;
+    margin-top: 50px;
+    width:90%;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 50px 0px 50px 0px;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+
+}
+
+
+#getRoute .page-container{
+    width: 100%;
+}
+#getRoute .pagination{
+    width: 100%;
+    margin: 20px 0;
+    color: #2BBBAD;
+    display: inline-block;
+}
+
+#getRoute ul {
+    display: inline;
+    list-style-type: none;
+    margin-bottom: 0;
+    margin-left: 0;
+    /*-webkit-border-radius: 4px;*/
+    /*-moz-border-radius: 4px;*/
+    /*border-radius: 4px;*/
+    /**zoom: 1;*/
+    /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);*/
+    /*-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);*/
+    /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05)*/
+     box-shadow: none;
+
+}
+
+#getRoute .pagination ul > li {
+    display: inline;
+}
+
+#getRoute .pagination ul > li > a, .pagination ul > li > span {
+    float: left;
+    padding: 4px 12px;
+    line-height: 20px;
+    text-decoration: none;
+    color: #2BBBAD;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-left-width: 0
+}
+
+#getRoute .pagination ul > li > a:hover, .pagination ul > li > a:focus, .pagination ul > .active > a, .pagination ul > .active > span {
+    background-color: #eceff1;
+    cursor: pointer;
+}
+
+#getRoute .pagination ul > .active > a, .pagination ul > .active > span {
+    background-color: #eceff1;
+    color: #607d8b;
+    cursor: default
+}
+
+#getRoute .pagination ul > .disabled > span, .pagination ul > .disabled > a, .pagination ul > .disabled > a:hover, .pagination ul > .disabled > a:focus {
+    color: #607d8b;
+    cursor: default;
+    background-color: transparent
+}
+
+#getRoute .pagination ul > li:first-child > a, .pagination ul > li:first-child > span {
+    border-left-width: 1px;
+    -webkit-border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    border-top-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-topleft: 4px
+}
+
+#getRoute .pagination ul > li:last-child > a, .pagination ul > li:last-child > span {
+    -webkit-border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px
+}
+
+#getRoute #dateLabel{
+    display: block;
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 150px;
+    float: none;
+    margin-bottom: 20px;
+    font-size: 120%;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+#getRoute #cityLabel{
+    text-align: left;
+    display: block;
+    margin-left: 5%;
+    font-size: 120%;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+#getRoute #creatorLabel{
+    text-align: left;
+    display: block;
+    margin-left: 5%;
+    font-size: 120%;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+#getRoute #othersLabel{
+    display: block;
+    text-align: left;
+    margin-left: 5%;
+    font-size: 120%;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+#getRoute #routeLabel{
+    display: block;
+    text-align: left;
+}
+
+.newRouteLabel{
+    margin-left: 5%;
+    font-size: 120%;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/*旅行社展示*/
+.agencycontent{
+    width: 100%;
+
+    margin-bottom: 200px;
+
+}
+.agencycontainer{
+    width:90%;
+    margin-left:5%;
+    margin-top: 50px;
+    margin-bottom:200px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 50px 0 0 50px;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    overflow-x: auto;
+}
+.agency-container{
+    margin-right: 50px;
+}
+.agency-container p{
+    margin-bottom: 50px;
+}
+
+
+/*分页*/
+.pagination {
+    margin: 20px 0;
+    color: #2BBBAD;
+    display: inline-block;
+
+
+}
+
+.pagination ul {
+
+    margin-bottom: 0;
+    margin-left: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    *zoom: 1;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05)
+
+}
+
+.pagination ul > li {
+    display: inline
+}
+
+.pagination ul > li > a, .pagination ul > li > span {
+    float: left;
+    padding: 4px 12px;
+    line-height: 20px;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-left-width: 0
+}
+
+.pagination ul > li > a:hover, .pagination ul > li > a:focus, .pagination ul > .active > a, .pagination ul > .active > span {
+    background-color: #eceff1;
+    cursor: pointer;
+}
+
+.pagination ul > .active > a, .pagination ul > .active > span {
+    color: #607d8b;
+    cursor: default
+}
+
+.pagination ul > .disabled > span, .pagination ul > .disabled > a, .pagination ul > .disabled > a:hover, .pagination ul > .disabled > a:focus {
+    color: #607d8b;
+    cursor: default;
+    background-color: transparent
+}
+
+.pagination ul > li:first-child > a, .pagination ul > li:first-child > span {
+    border-left-width: 1px;
+    -webkit-border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    border-top-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-topleft: 4px
+}
+
+.pagination ul > li:last-child > a, .pagination ul > li:last-child > span {
+    -webkit-border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px
+}
+
+.pagination-centered {
+    text-align: center
+}
+
+.pagination-right {
+    text-align: right
+}
+
+.pagination-large ul > li > a, .pagination-large ul > li > span {
+    padding: 11px 19px;
+    font-size: 17.5px
+}
+
+.pagination-large ul > li:first-child > a, .pagination-large ul > li:first-child > span {
+    -webkit-border-bottom-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    -webkit-border-top-left-radius: 6px;
+    border-top-left-radius: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    -moz-border-radius-topleft: 6px
+}
+
+.pagination-large ul > li:last-child > a, .pagination-large ul > li:last-child > span {
+    -webkit-border-top-right-radius: 6px;
+    border-top-right-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-bottomright: 6px
+}
+
+.pagination-mini ul > li:first-child > a, .pagination-small ul > li:first-child > a, .pagination-mini ul > li:first-child > span, .pagination-small ul > li:first-child > span {
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-topleft: 3px
+}
+
+.pagination-mini ul > li:last-child > a, .pagination-small ul > li:last-child > a, .pagination-mini ul > li:last-child > span, .pagination-small ul > li:last-child > span {
+    -webkit-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 3px
+}
+
+.pagination-small ul > li > a, .pagination-small ul > li > span {
+    padding: 2px 10px;
+    font-size: 11.9px
+}
+
+.pagination-mini ul > li > a, .pagination-mini ul > li > span {
+    padding: 0 6px;
+    font-size: 10.5px
+}
+
+
+/*table*/
+#agencyList{
+
+    margin-bottom: 100px;
+}
+
+#agencyList .table {
+    width: 100%;
+    color: #263238;
+    margin-bottom: 20px
+}
+
+#agencyList .table td {
+    padding: 20px 15px;
+    line-height: 25px;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+#agencyList .table th{
+    background-color: #eceff1;
+    padding: 20px 15px;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px solid #ddd
+}
+
+#getAgency h1{
+    /*font-size: 150%;*/
+    color: #4ba7a4;
+    text-shadow:1px 1px 0 #fff, 2px 2px 0 #00aa90;
+}
+
+#getAgency .container{
+    width:90%;
+    margin-left:5%;
+    margin-top: 50px;
+    margin-bottom:200px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 50px 0 0 50px;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    overflow-x: auto;
+}
+
+
+#getAgency .pagination{
+    width: 100%;
+    margin: 20px 0;
+    color: #2BBBAD;
+    display: inline-block;
+}
+
+#getAgency ul {
+    display: inline;
+    list-style-type: none;
+    margin-bottom: 0;
+    margin-left: 0;
+    /*-webkit-border-radius: 4px;*/
+    /*-moz-border-radius: 4px;*/
+    /*border-radius: 4px;*/
+    /**zoom: 1;*/
+    /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);*/
+    /*-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);*/
+    /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05)*/
+    box-shadow: none;
+
+}
+
+#getAgency .pagination ul > li {
+    display: inline;
+}
+
+#getAgency .pagination ul > li > a, .pagination ul > li > span {
+    float: left;
+    padding: 4px 12px;
+    line-height: 20px;
+    text-decoration: none;
+    color: #2BBBAD;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-left-width: 0
+}
+
+#getAgency .pagination ul > li > a:hover, .pagination ul > li > a:focus, .pagination ul > .active > a, .pagination ul > .active > span {
+    background-color: #eceff1;
+    cursor: pointer;
+}
+
+#getAgency .pagination ul > .active > a, .pagination ul > .active > span {
+    background-color: #eceff1;
+    color: #607d8b;
+    cursor: default
+}
+
+#getAgency .pagination ul > .disabled > span, .pagination ul > .disabled > a, .pagination ul > .disabled > a:hover, .pagination ul > .disabled > a:focus {
+    color: #607d8b;
+    cursor: default;
+    background-color: transparent
+}
+
+#getAgency .pagination ul > li:first-child > a, .pagination ul > li:first-child > span {
+    border-left-width: 1px;
+    -webkit-border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    border-top-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-topleft: 4px
+}
+
+#getAgency .pagination ul > li:last-child > a, .pagination ul > li:last-child > span {
+    -webkit-border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px
+}
+
+#getAgency #dateLabel{
+    display: block;
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 150px;
+    float: none;
+    margin-bottom: 20px;
+    font-size: 120%;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+#getAgency #cityLabel{
+    text-align: left;
+    display: block;
+    margin-left: 5%;
+    font-size: 120%;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+#getAgency #creatorLabel{
+    text-align: left;
+    display: block;
+    margin-left: 5%;
+    font-size: 120%;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+#getAgency #othersLabel{
+    display: block;
+    text-align: left;
+    margin-left: 5%;
+    font-size: 120%;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+#getAgency #routeLabel{
+    display: block;
+    text-align: left;
 }

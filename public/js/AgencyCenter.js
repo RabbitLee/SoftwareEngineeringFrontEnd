@@ -30,15 +30,6 @@ $(document).ready(function() {
 
     });
 
-    /*初始化个人信息*/
-    document.getElementById("usernamesignup").value = "zayy";
-
-    document.getElementById("passwordsignup").value = "1234";
-
-    document.getElementById("emailsignup").value = "8070@qq.com";
-
-    document.getElementById("telesignup").value = "1234";
-
     /*初始个人中心*/
     $.ajax({
         url: "/square/showAllRoute",
@@ -144,162 +135,9 @@ $(document).ready(function() {
         }
     });
 
-//初始化旅行社
-    $.ajax({
-        url: "/square/showAllRoute",
-        datatype: 'json',
-        type: "post",
-        data: null,
-        success: function (data) {
-
-        },
-        error: function ()
-        {
-            var data={"list":[{"routeId":"1","agency":"中国青旅","date":["2017/01/02","2017/01/10"],"city":"上海","state":"未支付"},
-                {"routeId":"2","agency":"中国青旅","date":["2017/01/02","2017/01/10"],"city":"上海","state":"已支付"}],"pageCount":10,"CurrentPage":"1"};
-
-            if (data != null) {
-                $.each(data.list, function (index, item) { //遍历返回的json
-                    $("#agency_table").append(
-
-                        '<tbody>' +
-                        '<tr>' +
-                        '<td>' + item.agency + '</td>' +
-                        '<td>' + item.date[0] + '</td>' +
-                        '<td>' + item.date[1] + '</td>' +
-                        '<td>' + item.city + '</td>' +
-                        '<td>' + item.routeId + '</td>' +
-                        '<td>' + item.state + '</td>' +
-                        '<td>' +
-                        '<button class="btn-view" onclick="PayAgency('+item.routeId+');">支付</button>' +
-                        '</td>' +
-                        '</tr>' +
-                        '</tbody>' +
-                        '</table>'
-
-                    );
-
-                });
-
-                var pageCount = data.pageCount; //取到pageCount的值(把返回数据转成object类型)
-                var currentPage = data.CurrentPage; //得到urrentPage
-
-                var options = {
-                    bootstrapMajorVersion: 2, //版本
-                    currentPage: currentPage, //当前页数
-                    totalPages: pageCount, //总页数
-                    itemTexts: function (type, page, current) {
-                        switch (type) {
-                            case "first":
-                                return "首页";
-                            case "prev":
-                                return "上一页";
-                            case "next":
-                                return "下一页";
-                            case "last":
-                                return "末页";
-                            case "page":
-                                return page;
-                        }
-                    },
-
-                    //点击事件，用于通过Ajax来刷新整个list列表
-                    onPageClicked: function (event, originalEvent, type, page) {
-                        $.ajax({
-                            url: "/square/showAllRoute?id=" + page,
-                            type: "post",
-                            data: "page=" + page,
-                            success: function (data1) {
-
-                            },
-                            error: function () {
-                                var data={"list":[{"routeId":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
-                                    {"routeId":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
-
-                                if (data != null) {
-                                    $("#agency_table tbody").remove();
-                                    $.each(data.list, function (index, item) { //遍历返回的json
-                                        $("#agency_table").append(
-
-                                            '<tbody>' +
-                                            '<tr>' +
-                                            '<td>' + item.agency + '</td>' +
-                                            '<td>' + item.date[0] + '</td>' +
-                                            '<td>' + item.date[1] + '</td>' +
-                                            '<td>' + item.city + '</td>' +
-                                            '<td>' + item.routeId + '</td>' +
-                                            '<td>' + item.state + '</td>' +
-                                            '<td>' +
-                                            '<button class="btn-view" onclick="PayAgency('+item.routeId+');">支付</button>' +
-                                            '</td>' +
-                                            '</tr>' +
-                                            '</tbody>' +
-                                            '</table>'
-
-                                        );
-
-                                    });
-                                }
-                            }
-                        });
-                    }
-                };
-                $('#agency-page').bootstrapPaginator(options);
-            }
-        }
-    });
 
 });
-function settingCheck() {
 
-    var name = document.getElementById("usernamesignup").value;
-    document.getElementById("usernameSignup-info").innerHTML = "";
-    var password = document.getElementById("passwordsignup").value;
-    document.getElementById("passwordSignup-info").innerHTML = "";
-    var repassword = document.getElementById("passwordsignup_confirm").value;
-    document.getElementById("repasswordinfo").innerHTML = "";
-    var email= document.getElementById("emailsignup").value;
-    document.getElementById("emailinfo").innerHTML = "";
-    var telephone = document.getElementById("telesignup").value;
-    document.getElementById("teleinfo").innerHTML = "";
-
-    if(name == "") {
-        document.getElementById("usernameSignup-info").innerHTML = "用户名不能为空";
-        $("#usernameSignup-info").css({"color":"red","font-size":"80%"});
-        return false;
-    }
-    if(email == "") {
-        document.getElementById("emailinfo").innerHTML = "邮箱不能为空";
-        $("#emailinfo").css({"color":"red","font-size":"80%"});
-        return false;
-    }
-    if(email.indexOf("@") == -1 || email.indexOf(".") == -1) {
-        document.getElementById("emailinfo").innerHTML = "请输入有效邮箱";
-        $("#emailinfo").css({"color":"red","font-size":"80%"});
-        return false;
-    }
-    if(telephone == "" || telephone.length != 11 || isNaN(telephone)) {
-        document.getElementById("teleinfo").innerHTML = "请输入有效手机号码";
-        $("#teleinfo").css({"color":"red","font-size":"80%"});
-        return false;
-    }
-    if(password == "") {
-        document.getElementById("passwordSignup-info").innerHTML = "密码不能为空";
-        $("#passwordSignup-info").css({"color":"red","font-size":"80%"});
-        return false;
-    }
-    if(password.length < 6) {
-        document.getElementById("passwordSignup-info").innerHTML = "密码长度必须大于或者等于6";
-        $("#passwordSignup-info").css({"color":"red","font-size":"80%"});
-        return false;
-    }
-
-    if(repassword != password) {
-        document.getElementById("repasswordinfo").innerHTML = "两次输入的密码不一致";
-        $("#repasswordinfo").css({"color":"red","font-size":"80%"});
-        return false;
-    }
-}
 //展示某一次路线
 
 //创建显示路线的地图
@@ -372,7 +210,7 @@ function ViewRoute(routeId) {
             //旅行社投票
             $.each(myRoute.agency, function (index, item) { //遍历返回的json
                 $("#agencyLabel").append(
-                    '<label><input name="vote" type="radio" value='+item.agencyName+'>'+item.agencyName+' 出价: '+item.fare+'RMB (累计'+item.poll+'票）</label>'
+                    '<label>'+item.agencyName+' 出价: '+item.fare+'RMB (累计'+item.poll+'票）</label>'
                 );
             });
             if(myRoute.myVote != null){
@@ -457,7 +295,6 @@ function ViewRoute(routeId) {
     });
     window.location.href = "#head-bar";
     return false;
-
 }
 /*
  * 调用公交换乘服务
@@ -488,24 +325,27 @@ function loadTransfer(start,destination) {
     });
 }
 
-function voteFor() {
-        $.ajax({
-            url: '/square/voteRoute',
-            data: {
-                //user:
-                voteFor: $("input[name='vote']:checked").val()
-            },
-            type: 'post',
-            async: false, //同步
-            dataType: 'json',
-            success: function (data) {
-                ViewRoute();
-            },
-            error: function () {
-                alert("投票失败！");
-                ViewRoute();
-            }
-        });
+function bid() {
+
+    $.ajax({
+        url: '/square/bidForRoute',
+        data: {
+            //user:
+            bidFor: myRoute.routeId,
+            fare: $("input[name='money']").val()
+
+        },
+        type: 'post',
+        async: false, //同步
+        dataType: 'json',
+        success: function (data) {
+            ViewRoute();
+        },
+        error: function () {
+            alert("竞价失败！");
+            ViewRoute();
+        }
+    });
 
 }
 
