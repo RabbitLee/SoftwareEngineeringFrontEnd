@@ -233,9 +233,10 @@ function postPlan() {
      $.ajax({
         url: '/selectSpots/submitSelectedSpots',
         data: {
-            "start_date": dpd1,
-            "end_date": dpd2,
-            "spots_id": addSpotList
+            data: JSON.stringify({
+                date: [dpd1,dpd2],
+                spots_id: addSpotList
+            })
         },
         type: 'post',
         async: false, //同步
@@ -385,3 +386,30 @@ function reChoose() {
 //         //trans.search([121.514222,31.302853],[121.506357,31.282086],function(status, result){
 //     });
 // });
+function confirmRoute() {
+    var dpd1 = document.getElementById("dpd1").value;
+    var dpd2 = document.getElementById("dpd2").value;
+    $.ajax({
+        url: '/selectSpots/confirmSelectedSpots',
+        data: {
+            data: JSON.stringify({
+                shared: $("input[name='shared']:checked").val(),
+                spots_id: addSpotList,
+                date: [dpd1,dpd2],
+                time: myRoute.time,
+            })
+        },
+        type: 'post',
+        async: false, //同步
+        dataType: 'json',
+        success: function (data) {
+            window.location.href="/personInfo";
+        },
+        error: function () {
+            alert("确认景点数据失败！");
+            //test
+//test 显示路线
+        }
+    });
+
+}
