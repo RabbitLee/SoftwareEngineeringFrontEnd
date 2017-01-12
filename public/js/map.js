@@ -17,7 +17,7 @@ var RouteMap = new AMap.Map("RouteContainer", {
 var myRoute;
 var RouteColor = ['#d0104c','#ffbb33','#ff8800','#f596aa','#1c2331','#5e35b1','#fff']
 var cur_color = '#d0104c';
-
+var isLogin;
 function getSpot(city) {
     var spotArr;
     $.ajax({
@@ -125,7 +125,7 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
             spotLevel = [];
 
         $.each(spotArr, function(i,val){
-            lnglats.push(val.coordinate);
+            lnglats.push(val.coordinate[0]);
             spotName.push(val.name);
             visitTime.push(val.visit_time);
             spotId.push(val.spotid);
@@ -155,7 +155,7 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
             }
 
             marker = new AMap.Marker({
-                position:lnglats[i][0],
+                position:lnglats[i],
                 map:map,
                 icon: icon,
             });
@@ -163,9 +163,23 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
                 offset: new AMap.Pixel(10, -25),
                 content: spotName[i],
             });
+            var str_time;
+            if(parseInt(visitTime[i]/60) == 0 ){
+                str_time = visitTime[i]+"分钟";
+            }
+            else{
+                if((visitTime[i]%60) == 0)
+                {
+                    str_time = parseInt(visitTime[i]/60)+"小时";
+                }
+                else {
+                    str_time = parseInt(visitTime[i]/60)+"小时"+visitTime[i]%60+"分钟";
+                }
+
+            }
 
             marker.content = '<h3 style="text-align: center">'+spotName[i]+'</h3>' +
-                '<h4 style="text-align: center">推荐游玩时间：'+visitTime[i]+'分钟</h4> '+
+                '<h4 style="text-align: center">推荐游玩时间：'+str_time+'</h4> '+
                 "<div onclick=\"markerClick(\'"+spotName[i]+"\',\'"+spotId[i]+"\',\'"+visitTime[i]+"\',\'"+spotLevel[i]+"\')\" class='marker-button' >添加</div>";
             //给Marker绑定单击事件
             marker.on('click', markerClick);
@@ -201,10 +215,21 @@ function postPlan() {
         return false;
     }
 
-    //判不判断游览时间的= =感觉好像也没什么必要，毕竟只是规划路线。
-    // if( duration < )
-    //
-    // )
+    $.ajax({
+        url: '/login/whetherLogin',
+        data: null,
+        type: 'post',
+        async: false, //同步
+        dataType: 'json',
+        success: function (data) {
+           isLogin = data.whetherLogin;
+        },
+    });
+    if(!isLogin){
+        alert("请先登录,才能提交");
+        return false;
+    }
+
      $.ajax({
         url: '/selectSpots/submitSelectedSpots',
         data: {
@@ -223,83 +248,83 @@ function postPlan() {
             alert("上传景点数据失败！");
             //test
 //test 显示路线
-            $(".content").hide();
-
-            $("#RouteContent").show();
-            myRoute ={"spots_id": [["1", "2"],["2","3"]],
-                "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
-                "name": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
-                "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
-            var colorID = 0;
-
-            var insertDate = "旅行日期: "+dpd1+" ~ "+dpd2;
-            var insertCity = "目的城市: "+CacheCity;
-            document.getElementById("dateLabel").innerHTML = insertDate;
-            document.getElementById("cityLabel").innerHTML = insertCity;
-            for(var i = 0; i < myRoute.coordinate.length; i++){
-                //每天
-                var newRouteLabel = document.createElement("div");
-                newRouteLabel.setAttribute("class","newRouteLabel");
-                var day = i + 1;
-                var insertRoute = "第"+day+"天: ";
-                cur_color = RouteColor[colorID];
-                for(var j = 0; j < myRoute.coordinate[i].length-1; j++){
-                    //每段路线
-                    //载入路线
-                    loadTransfer(myRoute.coordinate[i][j], myRoute.coordinate[i][j+1]);
-
-                    //每个景点的marker
-                    marker = new AMap.Marker({
-                        position:myRoute.coordinate[i][j],
-                        map:RouteMap,
-                    });
-                    marker.setLabel({
-                        offset: new AMap.Pixel(10, -25),
-                        content: myRoute.name[i][j],
-                    });
-                    marker.content = '<h3 style="text-align: center">'+ myRoute.name[i][j]+'</h3>' +
-                        '<h4 style="text-align: center">推荐开始游玩时间：'+myRoute.time[i][j][0]+'点, 结束游玩时间：'+myRoute.time[i][j][1]+'点</h4> ';
-                    //给Marker绑定单击事件
-                    marker.on('click', RouteMarkerClick);
-
-                    insertRoute += myRoute.name[i][j]+' --> ';
-                    if( j == myRoute.coordinate[i].length-2 ){
-                        marker = new AMap.Marker({
-                            position:myRoute.coordinate[i][j+1],
-                            map:RouteMap,
-                        });
-                        marker.setLabel({
-                            offset: new AMap.Pixel(10, -25),
-                            content: myRoute.name[i][j+1],
-                        });
-                        marker.content = '<h3 style="text-align: center">'+myRoute.name[i][j+1]+'</h3>' +
-                            '<h4 style="text-align: center">推荐开始游玩时间:'+myRoute.time[i][j+1][0]+'点 , 结束游玩时间:'+myRoute.time[i][j+1][1]+'点</h4>';
-                        //给Marker绑定单击事件
-                        marker.on('click', RouteMarkerClick);
-
-                        insertRoute += myRoute.name[i][j+1];
-                    }
-
-                }
-                colorID++;
-
-                newRouteLabel.innerHTML = insertRoute;
-                document.getElementById("routeLabel").appendChild(newRouteLabel);
-                //= =我能说什么呢
-                if(colorID >= 7){
-                    colorID = 0;
-                }
-            }
-            RouteMap.setFitView();
-            var infoWindow = new AMap.InfoWindow();
-            function RouteMarkerClick(e){
-                infoWindow.setContent(e.target.content);
-                infoWindow.open(RouteMap, e.target.getPosition());
-            }
-
-
         }
     });
+
+    $(".content").hide();
+
+    $("#RouteContent").show();
+    myRoute ={"spots_id": [["1", "2"],["2","3"]],
+        "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
+        "name": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
+        "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
+    var colorID = 0;
+
+    var insertDate = "旅行日期: "+dpd1+" ~ "+dpd2;
+    var insertCity = "目的城市: "+CacheCity;
+    document.getElementById("dateLabel").innerHTML = insertDate;
+    document.getElementById("cityLabel").innerHTML = insertCity;
+    for(var i = 0; i < myRoute.coordinate.length; i++){
+        //每天
+        var newRouteLabel = document.createElement("div");
+        newRouteLabel.setAttribute("class","newRouteLabel");
+        var day = i + 1;
+        var insertRoute = "第"+day+"天: ";
+        cur_color = RouteColor[colorID];
+        for(var j = 0; j < myRoute.coordinate[i].length-1; j++){
+            //每段路线
+            //载入路线
+            loadTransfer(myRoute.coordinate[i][j], myRoute.coordinate[i][j+1]);
+
+            //每个景点的marker
+            marker = new AMap.Marker({
+                position:myRoute.coordinate[i][j],
+                map:RouteMap,
+            });
+            marker.setLabel({
+                offset: new AMap.Pixel(10, -25),
+                content: myRoute.name[i][j],
+            });
+            marker.content = '<h3 style="text-align: center">'+ myRoute.name[i][j]+'</h3>' +
+                '<h4 style="text-align: center">推荐开始游玩时间：'+myRoute.time[i][j][0]+'点, 结束游玩时间：'+myRoute.time[i][j][1]+'点</h4> ';
+            //给Marker绑定单击事件
+            marker.on('click', RouteMarkerClick);
+
+            insertRoute += myRoute.name[i][j]+' --> ';
+            if( j == myRoute.coordinate[i].length-2 ){
+                marker = new AMap.Marker({
+                    position:myRoute.coordinate[i][j+1],
+                    map:RouteMap,
+                });
+                marker.setLabel({
+                    offset: new AMap.Pixel(10, -25),
+                    content: myRoute.name[i][j+1],
+                });
+                marker.content = '<h3 style="text-align: center">'+myRoute.name[i][j+1]+'</h3>' +
+                    '<h4 style="text-align: center">推荐开始游玩时间:'+myRoute.time[i][j+1][0]+'点 , 结束游玩时间:'+myRoute.time[i][j+1][1]+'点</h4>';
+                //给Marker绑定单击事件
+                marker.on('click', RouteMarkerClick);
+
+                insertRoute += myRoute.name[i][j+1];
+            }
+
+        }
+        colorID++;
+
+        newRouteLabel.innerHTML = insertRoute;
+        document.getElementById("routeLabel").appendChild(newRouteLabel);
+        //= =我能说什么呢
+        if(colorID >= 7){
+            colorID = 0;
+        }
+    }
+    RouteMap.setFitView();
+    var infoWindow = new AMap.InfoWindow();
+    function RouteMarkerClick(e){
+        infoWindow.setContent(e.target.content);
+        infoWindow.open(RouteMap, e.target.getPosition());
+    }
+
     window.location.href = "#head-bar";
     return false;
 
