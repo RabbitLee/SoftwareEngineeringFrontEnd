@@ -4,6 +4,8 @@
 
 var express = require('express');
 var router = express.Router();
+let constPara = require('./constPara');
+var request = require('request');
 
 router.post('/isUserValid', function (req, res, next) {
     // console.log(req.body);

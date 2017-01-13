@@ -408,7 +408,32 @@ body{
     font-weight: bold;
     margin-bottom: 10px;
 }
-#joinRoute{
+.HavingjoinRoute{
+    width: 40%;
+    cursor: pointer;
+    background: #b0bec5;
+    padding: 10px 1px;
+
+    color: #fff;
+    font-size: 24px;
+    border: none;
+    margin: 50px 30% 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 2px;
+    border-radius: 5px;
+    -webkit-box-shadow:
+            0px 0 4px #455a64;
+    -moz-box-shadow:
+            0px 0 4px #455a64;
+    box-shadow:
+            0px 0 4px #455a64 ;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+
+}
+.joinRoute{
     width: 40%;
     cursor: pointer;
     background: #00aa90;
@@ -433,12 +458,12 @@ body{
     transition: all 0.2s linear;
 
 }
-#joinRoute:hover{
+.joinRoute:hover{
     background: #00896c;
     /*border: 1px solid #268790;*/
 }
-#joinRoute:active,
-#joinRoute:focus{
+.joinRoute:active,
+.joinRoute:focus{
     background: #268785;
     position: relative;
     top: 1px;
@@ -447,6 +472,46 @@ body{
     -moz-box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;
     box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;
 }
+
+/*#joinRoute{*/
+    /*width: 40%;*/
+    /*cursor: pointer;*/
+    /*background: #00aa90;*/
+    /*padding: 10px 1px;*/
+
+    /*color: #fff;*/
+    /*font-size: 24px;*/
+    /*border: none;*/
+    /*margin: 50px 30% 0;*/
+    /*-webkit-border-radius: 3px;*/
+    /*-moz-border-radius: 2px;*/
+    /*border-radius: 5px;*/
+    /*-webkit-box-shadow:*/
+            /*0px 0 4px rgba(98, 152, 152, 1);*/
+    /*-moz-box-shadow:*/
+            /*0px 0 4px rgba(98, 152, 152, 1);*/
+    /*box-shadow:*/
+            /*0px 0 4px rgba(98, 152, 152, 1);*/
+    /*-webkit-transition: all 0.2s linear;*/
+    /*-moz-transition: all 0.2s linear;*/
+    /*-o-transition: all 0.2s linear;*/
+    /*transition: all 0.2s linear;*/
+
+/*}*/
+/*#joinRoute:hover{*/
+    /*background: #00896c;*/
+    /*!*border: 1px solid #268790;*!*/
+/*}*/
+/*#joinRoute:active,*/
+/*#joinRoute:focus{*/
+    /*background: #268785;*/
+    /*position: relative;*/
+    /*top: 1px;*/
+    /*!*border: 1px solid #268790;*!*/
+    /*-webkit-box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;*/
+    /*-moz-box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;*/
+    /*box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.2) inset;*/
+/*}*/
 
 #voteFor{
     width: 40%;

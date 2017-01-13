@@ -120,7 +120,20 @@ var RouteColor = ['#d0104c','#ffbb33','#ff8800','#f596aa','#1c2331','#5e35b1','#
 var cur_color = '#d0104c';
 
 function ViewRoute(routeId) {
-
+    $.ajax({
+        url: '/login/whetherLogin',
+        data: null,
+        type: 'post',
+        async: false, //同步
+        dataType: 'json',
+        success: function (data) {
+            isLogin = data.name;
+        },
+    });
+    if(isLogin == null){
+        alert("请先登录,才能提交");
+        return;
+    }
     // if( duration < )
     //
     // )
@@ -207,13 +220,23 @@ function ViewRoute(routeId) {
 
             $.each(myRoute.participants, function (index, item) { //遍历返回的json
                 if(item[0]==username){
-                    $("#joinRoute").attr("disabled", true);
-                    $("#joinRoute").empty();
-                    $("#joinRoute").append("已加入");
                     voteFlag = 1;
                 }
 
             });
+            if(voteFlag == 1) {
+                $("#joinRoute").attr("disabled", true);
+                $("#joinRoute").attr("class", "HavingjoinRoute");
+                $("#joinRoute").empty();
+                $("#joinRoute").append("已加入");
+
+            }
+            else{
+                $("#joinRoute").attr("disabled", false);
+                $("#joinRoute").attr("class", "joinRoute");
+                $("#joinRoute").empty();
+                $("#joinRoute").append("加入");
+            }
 
             RouteMap.clearMap();
             for(var i = 0; i < myRoute.coordinate.length; i++){
@@ -338,30 +361,36 @@ function joinRoute() {
     });
 }
 function voteFor() {
+
+
     if(!voteFlag){
         document.getElementById("voteinfo").innerHTML = "请先加入路线，才可投票";
         $("#voteinfo").css({"color":"red","font-size":"80%"});
         return;
     }
     else{
-        $.ajax({
-            url: '/square/voteRoute',
-            data: {
-                //user:
-                voteFor: $("input[name='vote']:checked").val(),
-                detailRouteID: myRoute.routeID
-            },
-            type: 'post',
-            async: false, //同步
-            dataType: 'json',
-            success: function (data) {
-                ViewRoute(myRoute.routeID);
-            },
-            error: function () {
-                alert("投票失败！");
-                ViewRoute(myRoute.routeID);
-            }
-        });
+        if(confirm("你已经投过票了，确定要重新投票吗:）"))
+        {
+            $.ajax({
+                url: '/square/voteRoute',
+                data: {
+                    //user:
+                    voteFor: $("input[name='vote']:checked").val(),
+                    detailRouteID: myRoute.routeID
+                },
+                type: 'post',
+                async: false, //同步
+                dataType: 'json',
+                success: function (data) {
+                    ViewRoute(myRoute.routeID);
+                },
+                error: function () {
+                    alert("投票失败！");
+                    ViewRoute(myRoute.routeID);
+                }
+            });
+        }
+
     }
 }
 

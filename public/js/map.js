@@ -222,10 +222,10 @@ function postPlan() {
         async: false, //同步
         dataType: 'json',
         success: function (data) {
-           isLogin = data.whetherLogin;
+           isLogin = data.name;
         },
     });
-    if(!isLogin){
+    if(isLogin == null){
         alert("请先登录,才能提交");
         return false;
     }
