@@ -808,3 +808,30 @@ p.change.button{
     -o-transition: all 0.2s linear;
     transition: all 0.2s linear;
 }
+
+#exitAgency{
+    width: 94%;
+    cursor: pointer;
+    background: #b0bec5;
+    padding: 8px 1px;
+
+    margin-bottom: 10px;
+    margin-left: 50px;
+
+    color: #fff;
+    font-size: 24px;
+    border: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow:
+            0px 0 4px #455a64;
+    -moz-box-shadow:
+            0px 0 4px #455a64;
+    box-shadow:
+            0px 0 4px #455a64 ;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}

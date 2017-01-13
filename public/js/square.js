@@ -61,7 +61,9 @@ $(function () {
                         $.ajax({
                             url: "/square/showRouteInPage",
                             type: "post",
-                            data: page,
+                            data: {
+                                "page": page
+                            },
                             success: function (data) {
                                 // var data={"list":[{"routeId":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
                                 //     {"routeId":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
@@ -79,7 +81,7 @@ $(function () {
                                             '<td>' + item.spot[0] + '</td>' +
                                             '<td>' + item.spot[1] + '</td>' +
                                             '<td>' +
-                                            '<button class="btn-view" onclick="ViewRoute("'+item.routeId+'");">查看</button>' +
+                                            '<button class="btn-view" onclick="ViewRoute(\''+item.routeID+'\');">查看</button>' +
                                             '</td>' +
                                             '</tr>' +
                                             '</tbody>' +
@@ -120,6 +122,7 @@ var RouteColor = ['#d0104c','#ffbb33','#ff8800','#f596aa','#1c2331','#5e35b1','#
 var cur_color = '#d0104c';
 
 function ViewRoute(routeId) {
+    var isLogin = null;
     $.ajax({
         url: '/login/whetherLogin',
         data: null,
