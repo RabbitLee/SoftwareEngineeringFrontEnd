@@ -41,5 +41,15 @@ router.post('/whetherAgencyLogin', function (req, res, next) {
     res.send({name: req.session.agencyName});
 })
 
+router.post('/exitAccount', function (req, res, next) {
+    req.session.name = null;
+    res.sendStatus(200);
+})
+
+router.post('/exitAgencyAccount', function (req, res, next) {
+    req.session.agencyName = null;
+    res.sendStatus(200);
+})
+
 module.exports = router;
 
