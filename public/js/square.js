@@ -210,25 +210,26 @@ function ViewRoute(routeId) {
                 }
             }
 
-            // 判断能不能投票加入
-            // let username = null;
-            // $.ajax({
-            //     url: '/login/whetherLogin',
-            //     data: null,
-            //     type: 'post',
-            //     async: false,
-            //     dataType: 'json',
-            //     success: function (data) {
-            //         username = data.name;
-            //     }
-            // });
-            //
-            // $.each(myRoute.participants, function (index, item) { //遍历返回的json
-            //     if(item[0]==username){
-            //         voteFlag = 1;
-            //     }
-            //
-            // });
+            //判断能不能投票加入
+            let username = null;
+            $.ajax({
+                url: '/login/whetherLogin',
+                data: null,
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    username = data.name;
+                }
+            });
+
+            $.each(myRoute.participants, function (index, item) { //遍历返回的json
+                if(item[0]==username){
+                    voteFlag = 1;
+                }
+
+            });
+
             if(voteFlag == 1) {
                 $("#joinRoute").attr("disabled", true);
                 $("#joinRoute").attr("class", "HavingjoinRoute");
