@@ -2,6 +2,7 @@
  * Created by zhaoangyouyou on 11/01/2017.
  */
 var voteFlag  = 0;
+var isVote = 0
 $(function () {
     $.ajax({
         url: "/square/showRouteInPage",
@@ -61,7 +62,9 @@ $(function () {
                         $.ajax({
                             url: "/square/showRouteInPage",
                             type: "post",
-                            data: page,
+                            data: {
+                                "page": page
+                            },
                             success: function (data) {
                                 // var data={"list":[{"routeId":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
                                 //     {"routeId":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
@@ -79,7 +82,7 @@ $(function () {
                                             '<td>' + item.spot[0] + '</td>' +
                                             '<td>' + item.spot[1] + '</td>' +
                                             '<td>' +
-                                            '<button class="btn-view" onclick="ViewRoute("'+item.routeId+'");">查看</button>' +
+                                            '<button class="btn-view" onclick="ViewRoute(\''+item.routeID+'\');">查看</button>' +
                                             '</td>' +
                                             '</tr>' +
                                             '</tbody>' +
@@ -120,6 +123,7 @@ var RouteColor = ['#d0104c','#ffbb33','#ff8800','#f596aa','#1c2331','#5e35b1','#
 var cur_color = '#d0104c';
 
 function ViewRoute(routeId) {
+    var isLogin = null;
     $.ajax({
         url: '/login/whetherLogin',
         data: null,
@@ -194,6 +198,7 @@ function ViewRoute(routeId) {
             });
             if(myRoute.myVote != null){
 
+                isVote = 1;
                 for(var j=0; j< document.getElementsByName("vote").length;j++)
                 {
 
@@ -224,6 +229,7 @@ function ViewRoute(routeId) {
                 }
 
             });
+
             if(voteFlag == 1) {
                 $("#joinRoute").attr("disabled", true);
                 $("#joinRoute").attr("class", "HavingjoinRoute");
@@ -237,7 +243,11 @@ function ViewRoute(routeId) {
                 $("#joinRoute").empty();
                 $("#joinRoute").append("加入");
             }
-
+            if(myRoute.paymentState == "已支付"){
+                $("#voteFor").attr("disabled", true);
+                $("#voteFor").empty();
+                $("#voteFor").append("已支付");
+            }
             RouteMap.clearMap();
             for(var i = 0; i < myRoute.coordinate.length; i++){
 
@@ -369,8 +379,30 @@ function voteFor() {
         return;
     }
     else{
-        if(confirm("你已经投过票了，确定要重新投票吗:）"))
-        {
+        if(isVote){
+            if(confirm("你已经投过票了，确定要重新投票吗:）"))
+            {
+                $.ajax({
+                    url: '/square/voteRoute',
+                    data: {
+                        //user:
+                        voteFor: $("input[name='vote']:checked").val(),
+                        detailRouteID: myRoute.routeID
+                    },
+                    type: 'post',
+                    async: false, //同步
+                    dataType: 'json',
+                    success: function (data) {
+                        ViewRoute(myRoute.routeID);
+                    },
+                    error: function () {
+                        alert("投票失败！");
+                        ViewRoute(myRoute.routeID);
+                    }
+                });
+            }
+        }
+        else {
             $.ajax({
                 url: '/square/voteRoute',
                 data: {
@@ -390,6 +422,7 @@ function voteFor() {
                 }
             });
         }
+
 
     }
 }

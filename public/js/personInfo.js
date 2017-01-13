@@ -2,7 +2,8 @@
  * Created by zhaoangyouyou on 28/12/2016.
  */
 
-
+var isVote = 0;
+var tempData=[];
 
 $(document).ready(function() {
 
@@ -40,214 +41,225 @@ $(document).ready(function() {
     document.getElementById("telesignup").value = "1234";
 
     /*初始个人中心*/
-//     $.ajax({
-//         url: "/square/showRouteInPage",
-//         datatype: 'json',
-//         type: "post",
-//         data: null,
-//         success: function (data) {
-//
-//         },
-//         error: function ()
-//         {
-//             var data={"list":[{"routeId":"1","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
-//                 {"routeId":"2","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
-//
-//             if (data != null) {
-//                 $.each(data.list, function (index, item) { //遍历返回的json
-//                     $("#data_table").append(
-//
-//                         '<tbody>' +
-//                         '<tr>' +
-//                         '<td>' + item.creator + '</td>' +
-//                         '<td>' + item.date[0] + '</td>' +
-//                         '<td>' + item.date[1] + '</td>' +
-//                         '<td>' + item.city + '</td>' +
-//                         '<td>' + item.spot[0] + '</td>' +
-//                         '<td>' + item.spot[1] + '</td>' +
-//                         '<td>' +
-//                         '<button class="btn-view" onclick="ViewRoute('+item.routeId+');">查看</button>' +
-//                         '</td>' +
-//                         '</tr>' +
-//                         '</tbody>' +
-//                         '</table>'
-//
-//                     );
-//
-//                 });
-//
-//                 var pageCount = data.pageCount; //取到pageCount的值(把返回数据转成object类型)
-//                 var currentPage = data.CurrentPage; //得到urrentPage
-//
-//                 var options = {
-//                     bootstrapMajorVersion: 2, //版本
-//                     currentPage: currentPage, //当前页数
-//                     totalPages: pageCount, //总页数
-//                     itemTexts: function (type, page, current) {
-//                         switch (type) {
-//                             case "first":
-//                                 return "首页";
-//                             case "prev":
-//                                 return "上一页";
-//                             case "next":
-//                                 return "下一页";
-//                             case "last":
-//                                 return "末页";
-//                             case "page":
-//                                 return page;
-//                         }
-//                     },
-//
-//                     //点击事件，用于通过Ajax来刷新整个list列表
-//                     onPageClicked: function (event, originalEvent, type, page) {
-//                         $.ajax({
-//                             url: "/square/showRouteInPage",
-//                             type: "post",
-//                             data: page,
-//                             success: function (data) {
-//
-//                             },
-//                             error: function () {
-//                                 var data={"list":[{"routeId":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
-//                                     {"routeId":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
-//
-//                                 if (data != null) {
-//                                     $("#data_table tbody").remove();
-//                                     $.each(data.list, function (index, item) { //遍历返回的json
-//                                         $("#data_table").append(
-//
-//                                             '<tbody>' +
-//                                             '<tr>' +
-//                                             '<td>' + item.creator + '</td>' +
-//                                             '<td>' + item.date[0] + '</td>' +
-//                                             '<td>' + item.date[1] + '</td>' +
-//                                             '<td>' + item.city + '</td>' +
-//                                             '<td>' + item.spot[0] + '</td>' +
-//                                             '<td>' + item.spot[1] + '</td>' +
-//                                             '<td>' +
-//                                             '<button class="btn-view" onclick="ViewRoute( '+item.routeId+' );">查看</button>' +
-//                                             '</td>' +
-//                                             '</tr>' +
-//                                             '</tbody>' +
-//                                             '</table>'
-//
-//                                         );
-//
-//                                     });
-//                                 }
-//                             }
-//                         });
-//                     }
-//                 };
-//                 $('#page').bootstrapPaginator(options);
-//             }
-//         }
-//     });
-//
-// //初始化旅行社
-//     $.ajax({
-//         url: "/square/showAllRoute",
-//         datatype: 'json',
-//         type: "post",
-//         data: null,
-//         success: function (data) {
-//
-//         },
-//         error: function ()
-//         {
-//             var data={"list":[{"routeId":"1","agency":"中国青旅","date":["2017/01/02","2017/01/10"],"city":"上海","state":"未支付"},
-//                 {"routeId":"2","agency":"中国青旅","date":["2017/01/02","2017/01/10"],"city":"上海","state":"已支付"}],"pageCount":10,"CurrentPage":"1"};
-//
-//             if (data != null) {
-//                 $.each(data.list, function (index, item) { //遍历返回的json
-//                     $("#agency_table").append(
-//
-//                         '<tbody>' +
-//                         '<tr>' +
-//                         '<td>' + item.agency + '</td>' +
-//                         '<td>' + item.date[0] + '</td>' +
-//                         '<td>' + item.date[1] + '</td>' +
-//                         '<td>' + item.city + '</td>' +
-//                         '<td>' + item.routeId + '</td>' +
-//                         '<td>' + item.state + '</td>' +
-//                         '<td>' +
-//                         '<button class="btn-view" onclick="PayAgency('+item.routeId+');">支付</button>' +
-//                         '</td>' +
-//                         '</tr>' +
-//                         '</tbody>' +
-//                         '</table>'
-//
-//                     );
-//
-//                 });
-//
-//                 var pageCount = data.pageCount; //取到pageCount的值(把返回数据转成object类型)
-//                 var currentPage = data.CurrentPage; //得到urrentPage
-//
-//                 var options = {
-//                     bootstrapMajorVersion: 2, //版本
-//                     currentPage: currentPage, //当前页数
-//                     totalPages: pageCount, //总页数
-//                     itemTexts: function (type, page, current) {
-//                         switch (type) {
-//                             case "first":
-//                                 return "首页";
-//                             case "prev":
-//                                 return "上一页";
-//                             case "next":
-//                                 return "下一页";
-//                             case "last":
-//                                 return "末页";
-//                             case "page":
-//                                 return page;
-//                         }
-//                     },
-//
-//                     //点击事件，用于通过Ajax来刷新整个list列表
-//                     onPageClicked: function (event, originalEvent, type, page) {
-//                         $.ajax({
-//                             url: "/square/showAllRoute?id=" + page,
-//                             type: "post",
-//                             data: "page=" + page,
-//                             success: function (data1) {
-//
-//                             },
-//                             error: function () {
-//                                 var data={"list":[{"routeId":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
-//                                     {"routeId":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
-//
-//                                 if (data != null) {
-//                                     $("#agency_table tbody").remove();
-//                                     $.each(data.list, function (index, item) { //遍历返回的json
-//                                         $("#agency_table").append(
-//
-//                                             '<tbody>' +
-//                                             '<tr>' +
-//                                             '<td>' + item.agency + '</td>' +
-//                                             '<td>' + item.date[0] + '</td>' +
-//                                             '<td>' + item.date[1] + '</td>' +
-//                                             '<td>' + item.city + '</td>' +
-//                                             '<td>' + item.routeId + '</td>' +
-//                                             '<td>' + item.state + '</td>' +
-//                                             '<td>' +
-//                                             '<button class="btn-view" onclick="PayAgency('+item.routeId+');">支付</button>' +
-//                                             '</td>' +
-//                                             '</tr>' +
-//                                             '</tbody>' +
-//                                             '</table>'
-//
-//                                         );
-//
-//                                     });
-//                                 }
-//                             }
-//                         });
-//                     }
-//                 };
-//                 $('#agency-page').bootstrapPaginator(options);
-//             }
-//         }
-//     });
+    // $.ajax({
+    //     url: "/personInfo/showRouteInPage",
+    //     datatype: 'json',
+    //     type: "post",
+    //     data:   {
+    //         page: 1
+    //     },
+    //     success: function (data) {
+    //
+    //     },
+    //     error: function ()
+    //     {
+    //
+    //         var data={"list":[{"routeID":"1","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
+    //             {"routeID":"2","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
+    //
+    //         if (data != null) {
+    //             $.each(data.list, function (index, item) { //遍历返回的json
+    //                 $("#data_table").append(
+    //
+    //                     '<tbody>' +
+    //                     '<tr>' +
+    //                     '<td>' + item.creator + '</td>' +
+    //                     '<td>' + item.date[0] + '</td>' +
+    //                     '<td>' + item.date[1] + '</td>' +
+    //                     '<td>' + item.city + '</td>' +
+    //                     '<td>' + item.spot[0] + '</td>' +
+    //                     '<td>' + item.spot[1] + '</td>' +
+    //                     '<td>' +
+    //                     '<button class="btn-view" onclick="ViewRoute(\''+item.routeID+'\');">查看</button>' +
+    //                     '</td>' +
+    //                     '</tr>' +
+    //                     '</tbody>' +
+    //                     '</table>'
+    //
+    //                 );
+    //
+    //             });
+    //
+    //             var pageCount = data.pageCount; //取到pageCount的值(把返回数据转成object类型)
+    //             var currentPage = data.CurrentPage; //得到urrentPage
+    //
+    //             var options = {
+    //                 bootstrapMajorVersion: 2, //版本
+    //                 currentPage: currentPage, //当前页数
+    //                 totalPages: pageCount, //总页数
+    //                 itemTexts: function (type, page, current) {
+    //                     switch (type) {
+    //                         case "first":
+    //                             return "首页";
+    //                         case "prev":
+    //                             return "上一页";
+    //                         case "next":
+    //                             return "下一页";
+    //                         case "last":
+    //                             return "末页";
+    //                         case "page":
+    //                             return page;
+    //                     }
+    //                 },
+    //
+    //                 //点击事件，用于通过Ajax来刷新整个list列表
+    //                 onPageClicked: function (event, originalEvent, type, page) {
+    //                     $.ajax({
+    //                         url: "/personInfo/showRouteInPage",
+    //                         type: "post",
+    //                         data: {
+    //                             "page": page
+    //                         },
+    //                         success: function (data) {
+    //
+    //                         },
+    //                         error: function () {
+    //                             var data={"list":[{"routeID":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
+    //                                 {"routeID":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
+    //
+    //                             if (data != null) {
+    //                                 $("#data_table tbody").remove();
+    //                                 $.each(data.list, function (index, item) { //遍历返回的json
+    //                                     $("#data_table").append(
+    //
+    //                                         '<tbody>' +
+    //                                         '<tr>' +
+    //                                         '<td>' + item.creator + '</td>' +
+    //                                         '<td>' + item.date[0] + '</td>' +
+    //                                         '<td>' + item.date[1] + '</td>' +
+    //                                         '<td>' + item.city + '</td>' +
+    //                                         '<td>' + item.spot[0] + '</td>' +
+    //                                         '<td>' + item.spot[1] + '</td>' +
+    //                                         '<td>' +
+    //                                         '<button class="btn-view" onclick="ViewRoute(\''+item.routeID+'\');">查看</button>' +
+    //                                         '</td>' +
+    //                                         '</tr>' +
+    //                                         '</tbody>' +
+    //                                         '</table>'
+    //
+    //                                     );
+    //
+    //                                 });
+    //                             }
+    //                         }
+    //                     });
+    //                 }
+    //             };
+    //             $('#page').bootstrapPaginator(options);
+    //         }
+    //     }
+    // });
+
+//初始化旅行社
+    $.ajax({
+        url: "/personInfo/showAllAgency",
+        datatype: 'json',
+        type: "post",
+        data: {
+            page: 1
+        },
+        success: function (data) {
+
+        },
+        error: function ()
+        {
+            var data={"list":[{"routeID":"1","agency":"中国青旅","date":["2017/01/02","2017/01/10"],"city":"上海","state":"未支付"},
+                {"routeID":"2","agency":"中国青旅","date":["2017/01/02","2017/01/10"],"city":"上海","state":"已支付"}],"pageCount":10,"CurrentPage":"1"};
+
+            if (data != null) {
+                $.each(data.list, function (index, item) { //遍历返回的json
+                    $("#agency_table").append(
+
+                        '<tbody>' +
+                        '<tr>' +
+                        '<td>' + item.agency + '</td>' +
+                        '<td>' + item.date[0] + '</td>' +
+                        '<td>' + item.date[1] + '</td>' +
+                        '<td>' + item.city + '</td>' +
+                        '<td>' + item.routeID + '</td>' +
+                        '<td>' + item.state + '</td>' +
+                        '<td>' +
+
+                        '<button class="btn-view"  onclick="PayAgency(\''+item.routeID+'\',\''+item.state+'\');">支付</button>' +
+                        '</td>' +
+                        '</tr>' +
+                        '</tbody>' +
+                        '</table>'
+
+                    );
+
+                });
+
+                var pageCount = data.pageCount; //取到pageCount的值(把返回数据转成object类型)
+                var currentPage = data.CurrentPage; //得到urrentPage
+
+                var options = {
+                    bootstrapMajorVersion: 2, //版本
+                    currentPage: currentPage, //当前页数
+                    totalPages: pageCount, //总页数
+                    itemTexts: function (type, page, current) {
+                        switch (type) {
+                            case "first":
+                                return "首页";
+                            case "prev":
+                                return "上一页";
+                            case "next":
+                                return "下一页";
+                            case "last":
+                                return "末页";
+                            case "page":
+                                return page;
+                        }
+                    },
+
+                    //点击事件，用于通过Ajax来刷新整个list列表
+                    onPageClicked: function (event, originalEvent, type, page) {
+                        $.ajax({
+                            url: "/personInfo/showAllAgency",
+                            type: "post",
+                            data: {
+                                "page": page
+                            },
+                            success: function (data1) {
+
+                            },
+                            error: function () {
+                                var data={"list":[{"routeID":"1","agency":"中国青旅","date":["2017/01/02","2017/01/10"],"city":"上海","state":"未支付"},
+                                    {"routeID":"2","agency":"中国青旅","date":["2017/01/02","2017/01/10"],"city":"上海","state":"已支付"}],"pageCount":10,"CurrentPage":"1"};
+
+                                if (data != null) {
+                                    $("#agency_table tbody").remove();
+                                    $.each(data.list, function (index, item) { //遍历返回的json
+                                        $("#agency_table").append(
+
+                                            '<tbody>' +
+                                            '<tr>' +
+                                            '<td>' + item.agency + '</td>' +
+                                            '<td>' + item.date[0] + '</td>' +
+                                            '<td>' + item.date[1] + '</td>' +
+                                            '<td>' + item.city + '</td>' +
+                                            '<td>' + item.routeID + '</td>' +
+                                            '<td>' + item.state + '</td>' +
+                                            '<td>' +
+                                            '<button class="btn-view"  onclick="PayAgency(\''+item.routeID+'\',\''+item.state+'\');">支付</button>' +
+                                            '</td>' +
+                                            '</tr>' +
+                                            '</tbody>' +
+                                            '</table>'
+
+                                        );
+
+                                    });
+                                }
+
+                            }
+                        });
+                    }
+                };
+                $('#agency-page').bootstrapPaginator(options);
+            }
+        }
+    });
 
 });
 function settingCheck() {
@@ -318,7 +330,164 @@ function ViewRoute(routeId) {
     // if( duration < )
     //
     // )
+//     clearLastScene();
+//     $.ajax({
+//         url: '/square/getSelectedRoute',
+//         data: {
+//             "detailRouteID": routeId,
+//         },
+//         type: 'post',
+//         async: false, //同步
+//         dataType: 'json',
+//         success: function (data) {
+//             myRoute = data;
+//         },
+//         error: function () {
+//             alert("查看失败！");
+//             //test
+// //test 显示路线
+//             $(".content").hide();
+//
+//             $("#RouteContent").show();
+//             myRoute ={
+//                 "routeId":"33",
+//                 "creator": "zayy",
+//                 "participants": [["lyc", "旅行社1"], ["hzw", "旅行社2"],["zayy","旅行社1"]],
+//                 "city":"上海",
+//                 "myVote": "agency1", //当前用户投票的旅行社
+//                 "agency": [{"agencyName": "agency1", "fare": 100, "poll": 1}, {"agencyName": "agency2", "fare": 200, "poll": 2}],
+//                 "spots_id": [["1", "2"],["2","3"]],
+//                 "date": ["2016/01/01", "2017/12/20"],
+//                 "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
+//                 "spotsName": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
+//                 "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
+//
+//             var colorID = 0;
+//
+//             //文字说明
+//             var insertDate = "旅行日期: "+myRoute.date[0]+" ~ "+myRoute.date[1];
+//             var insertCity = "目的城市: "+myRoute.city;
+//             var insertCreator = "创建者: "+myRoute.creator;
+//             document.getElementById("creatorLabel").innerHTML = insertCreator;
+//             document.getElementById("dateLabel").innerHTML = insertDate;
+//             document.getElementById("cityLabel").innerHTML = insertCity;
+//
+//             $("#othersLabel").append(
+//                 "所有参与者: (总共"+myRoute.participants.length+"人)"
+//             );
+//             $.each(myRoute.participants, function (index, item) { //遍历返回的json
+//                 $("#othersLabel").append(
+//                     ", "+item[0]
+//                 );
+//
+//             });
+//             //旅行社投票
+//             $.each(myRoute.agency, function (index, item) { //遍历返回的json
+//                 $("#agencyLabel").append(
+//                     '<label><input name="vote" type="radio" value='+item.agencyName+'>'+item.agencyName+' 出价: '+item.fare+'RMB (累计'+item.poll+'票）</label>'
+//                 );
+//             });
+//             if(myRoute.myVote != null){
+//
+//                 for(var j=0; j< document.getElementsByName("vote").length;j++)
+//                 {
+//
+//                     if(document.getElementsByName("vote")[j].value == myRoute.myVote)
+//                     {
+//
+//                         document.getElementsByName("vote")[j].checked = true;
+//                     }
+//                 }
+//             }
+//
+//
+//             RouteMap.clearMap();
+//             for(var i = 0; i < myRoute.coordinate.length; i++){
+//
+//                 //每天
+//                 var newRouteLabel = document.createElement("div");
+//                 newRouteLabel.setAttribute("class","newRouteLabel");
+//                 var day = i + 1;
+//                 var insertRoute = "第"+day+"天: ";
+//                 cur_color = RouteColor[colorID];
+//                 for(var j = 0; j < myRoute.coordinate[i].length-1; j++){
+//                     //每段路线
+//                     //载入路线
+//                     loadTransfer(myRoute.coordinate[i][j], myRoute.coordinate[i][j+1]);
+//
+//                     //每个景点的marker
+//                     marker = new AMap.Marker({
+//                         position:myRoute.coordinate[i][j],
+//                         map:RouteMap,
+//                     });
+//                     marker.setLabel({
+//                         offset: new AMap.Pixel(10, -25),
+//                         content: myRoute.spotsName[i][j],
+//                     });
+//                     marker.content = '<h3 style="text-align: center">'+ myRoute.spotsName[i][j]+'</h3>' +
+//                         '<h4 style="text-align: center">推荐开始游玩时间：'+myRoute.time[i][j][0]+'点, 结束游玩时间：'+myRoute.time[i][j][1]+'点</h4> ';
+//                     //给Marker绑定单击事件
+//                     marker.on('click', RouteMarkerClick);
+//
+//                     insertRoute += myRoute.spotsName[i][j]+' --> ';
+//                     if( j == myRoute.coordinate[i].length-2 ){
+//                         marker = new AMap.Marker({
+//                             position:myRoute.coordinate[i][j+1],
+//                             map:RouteMap,
+//                         });
+//                         marker.setLabel({
+//                             offset: new AMap.Pixel(10, -25),
+//                             content: myRoute.spotsName[i][j+1],
+//                         });
+//                         marker.content = '<h3 style="text-align: center">'+myRoute.spotsName[i][j+1]+'</h3>' +
+//                             '<h4 style="text-align: center">推荐开始游玩时间:'+myRoute.time[i][j+1][0]+'点 , 结束游玩时间:'+myRoute.time[i][j+1][1]+'点</h4>';
+//                         //给Marker绑定单击事件
+//                         marker.on('click', RouteMarkerClick);
+//
+//                         insertRoute += myRoute.spotsName[i][j+1];
+//                     }
+//
+//                 }
+//                 colorID++;
+//
+//                 newRouteLabel.innerHTML = insertRoute;
+//                 document.getElementById("routeLabel").appendChild(newRouteLabel);
+//                 //= =我能说什么呢
+//                 if(colorID >= 7){
+//                     colorID = 0;
+//                 }
+//             }
+//             RouteMap.setFitView();
+//             var infoWindow = new AMap.InfoWindow();
+//             function RouteMarkerClick(e){
+//                 infoWindow.setContent(e.target.content);
+//                 infoWindow.open(RouteMap, e.target.getPosition());
+//             }
+//
+//
+//         }
+//     });
+//     window.location.href = "#head-bar";
+//     return false;
+    $.ajax({
+        url: '/login/whetherLogin',
+        data: null,
+        type: 'post',
+        async: false, //同步
+        dataType: 'json',
+        success: function (data) {
+            isLogin = data.name;
+        },
+    });
+    if(isLogin == null){
+        alert("请先登录,才能提交");
+        return;
+    }
+    // if( duration < )
+    //
+    // )
     clearLastScene();
+    // console.log(routeId);
     $.ajax({
         url: '/square/getSelectedRoute',
         data: {
@@ -329,26 +498,22 @@ function ViewRoute(routeId) {
         dataType: 'json',
         success: function (data) {
             myRoute = data;
-        },
-        error: function () {
-            alert("查看失败！");
-            //test
-//test 显示路线
+            // console.log(myRoute);
             $(".content").hide();
 
             $("#RouteContent").show();
-            myRoute ={
-                "routeId":"33",
-                "creator": "zayy",
-                "participants": [["lyc", "旅行社1"], ["hzw", "旅行社2"],["zayy","旅行社1"]],
-                "city":"上海",
-                "myVote": "agency1", //当前用户投票的旅行社
-                "agency": [{"agencyName": "agency1", "fare": 100, "poll": 1}, {"agencyName": "agency2", "fare": 200, "poll": 2}],
-                "spots_id": [["1", "2"],["2","3"]],
-                "date": ["2016/01/01", "2017/12/20"],
-                "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
-                "spotsName": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
-                "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
+            // myRoute ={
+            //     "routeId":"33",
+            //     "creator": "zayy",
+            //     "participants": [["lyc", "旅行社1"], ["hzw", "旅行社2"],["zayy","旅行社1"]],
+            //     "city":"上海",
+            //     "myVote": "agency1", //当前用户投票的旅行社
+            //     "agency": [{"agencyName": "agency1", "fare": 100, "poll": 1}, {"agencyName": "agency2", "fare": 200, "poll": 2}],
+            //     "spots_id": [["1", "2"],["2","3"]],
+            //     "date": ["2016/01/01", "2017/12/20"],
+            //     "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
+            //     "spotsName": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
+            //     "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
 
             var colorID = 0;
 
@@ -371,12 +536,13 @@ function ViewRoute(routeId) {
             });
             //旅行社投票
             $.each(myRoute.agency, function (index, item) { //遍历返回的json
+                // console.log(item);
                 $("#agencyLabel").append(
-                    '<label><input name="vote" type="radio" value='+item.agencyName+'>'+item.agencyName+' 出价: '+item.fare+'RMB (累计'+item.poll+'票）</label>'
+                    '<label><input name="vote" type="radio" value="'+item.agencyID+'">'+item.agencyID+' 出价: '+item.fare+'RMB (累计'+item.poll+'票）</label>'
                 );
             });
             if(myRoute.myVote != null){
-
+                sVote = 1;
                 for(var j=0; j< document.getElementsByName("vote").length;j++)
                 {
 
@@ -388,6 +554,38 @@ function ViewRoute(routeId) {
                 }
             }
 
+            //判断能不能投票加入
+            let username = null;
+            $.ajax({
+                url: '/login/whetherLogin',
+                data: null,
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    username = data.name;
+                }
+            });
+
+            $.each(myRoute.participants, function (index, item) { //遍历返回的json
+                if(item[0]==username){
+                    voteFlag = 1;
+                }
+
+            });
+            if(voteFlag == 1) {
+                $("#joinRoute").attr("disabled", true);
+                $("#joinRoute").attr("class", "HavingjoinRoute");
+                $("#joinRoute").empty();
+                $("#joinRoute").append("已加入");
+
+            }
+            else{
+                $("#joinRoute").attr("disabled", false);
+                $("#joinRoute").attr("class", "joinRoute");
+                $("#joinRoute").empty();
+                $("#joinRoute").append("加入");
+            }
 
             RouteMap.clearMap();
             for(var i = 0; i < myRoute.coordinate.length; i++){
@@ -452,7 +650,9 @@ function ViewRoute(routeId) {
                 infoWindow.open(RouteMap, e.target.getPosition());
             }
 
-
+        },
+        error: function () {
+            alert("查看失败！");
         }
     });
     window.location.href = "#head-bar";
@@ -489,23 +689,50 @@ function loadTransfer(start,destination) {
 }
 
 function voteFor() {
-        $.ajax({
-            url: '/square/voteRoute',
-            data: {
-                //user:
-                voteFor: $("input[name='vote']:checked").val()
-            },
-            type: 'post',
-            async: false, //同步
-            dataType: 'json',
-            success: function (data) {
-                ViewRoute();
-            },
-            error: function () {
-                alert("投票失败！");
-                ViewRoute();
+        if(isVote){
+            if(confirm("你已经投过票了，确定要重新投票吗:）"))
+            {
+                $.ajax({
+                    url: '/square/voteRoute',
+                    data: {
+                        //user:
+                        voteFor: $("input[name='vote']:checked").val(),
+                        detailRouteID: myRoute.routeID
+                    },
+                    type: 'post',
+                    async: false, //同步
+                    dataType: 'json',
+                    success: function (data) {
+                        ViewRoute(myRoute.routeID);
+                    },
+                    error: function () {
+                        alert("投票失败！");
+                        ViewRoute(myRoute.routeID);
+                    }
+                });
             }
-        });
+        }
+        else {
+            $.ajax({
+                url: '/square/voteRoute',
+                data: {
+                    //user:
+                    voteFor: $("input[name='vote']:checked").val(),
+                    detailRouteID: myRoute.routeID
+                },
+                type: 'post',
+                async: false, //同步
+                dataType: 'json',
+                success: function (data) {
+                    ViewRoute(myRoute.routeID);
+                },
+                error: function () {
+                    alert("投票失败！");
+                    ViewRoute(myRoute.routeID);
+                }
+            });
+        }
+
 
 }
 
@@ -527,7 +754,7 @@ function backAll() {
 
 function exit() {
     $.ajax({
-        url: '/login/whetherAgencyLogin',
+        url: '/login/exitAccount',
         data: {
 
         },
@@ -541,4 +768,12 @@ function exit() {
 
         }
     });
+}
+function PayAgency(routeID,state) {
+    if(state == "已支付"){
+        alert("您已经支付过了");
+    }
+    else{
+        window.open("pay.html");
+    }
 }
