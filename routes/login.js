@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/isUserValid', function (req, res, next) {
-     console.log(req.body);
+     // console.log(req.body);
      let name = req.body.name;
      let password = req.body.password;
      url = 'http://' + constPara.backEndUrl() + '/login/isUserValid';
@@ -31,6 +31,10 @@ router.post('/isUserValid', function (req, res, next) {
              res.send({'isValid': isValid});
          }
      })
+})
+
+router.post('/whetherLogin', function (req, res, next) {
+    res.send({name: req.session.name});
 })
 
 module.exports = router;

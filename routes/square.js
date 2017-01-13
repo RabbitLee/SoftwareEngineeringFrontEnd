@@ -23,20 +23,33 @@ router.get('/', function(req, res, next) {
 
 router.post('/showRouteInPage', function (req, res, next) {
     let page = req.body.page;
+    let number_in_a_page = 10;
     url = 'http://' + constPara.backEndUrl() + '/square/showAllRoute';
     request({url: url, method: 'POST'},
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
-                let allRoute = JSON.parse(body)['list'];
-
+                let list = JSON.parse(body)['list'];
+                // console.log(list);
+                let len = list.length;
+                let pageCount = Math.ceil(len/number_in_a_page);
+                let start = (page-1)*number_in_a_page;
+                let end = page*number_in_a_page;
+                if (end > len) {
+                    end = len;
+                }
+                // console.log(start, end);
+                let return_list = list.slice(start, end);
+                res.send({pageCount: pageCount, list: return_list});
             }
         })
 })
 
 router.post('/getSelectedRoute', function (req, res, next) {
-    let detailedRouteID = req.body.datailedRouteID;
+    let user = req.session.name;
+    let detailRouteID = req.body.detailRouteID;
+    // console.log({user:user, detailRouteID: detailRouteID});
     url = 'http://' + constPara.backEndUrl() + '/square/getSelectedRoute';
-    request({url: url, method: 'POST', form: {detailedRouteID: detailedRouteID}},
+    request({url: url, method: 'POST', form: {user:user, detailRouteID: detailRouteID}},
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let detaileRoute = JSON.parse(body);
@@ -45,11 +58,12 @@ router.post('/getSelectedRoute', function (req, res, next) {
         })
 })
 
-router.post('/', function (req, res, next) {
+router.post('/joinRoute', function (req, res, next) {
     let user = req.session.name;
-    let routeid = req.body.routeid;
-    url = 'http://' + constPara.backEndUrl() + '/square/voteRoute';
-    request({url: url, method: 'POST', form: {user: user, routeid: routeid}},
+    let detailRouteID = req.body.detailRouteID;
+    console.log({user: user, detailRouteID: detailRouteID});
+    url = 'http://' + constPara.backEndUrl() + '/square/joinRoute';
+    request({url: url, method: 'POST', form: {user: user, detailRouteID: detailRouteID}},
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let success = JSON.parse(body)['success'];
@@ -58,11 +72,13 @@ router.post('/', function (req, res, next) {
         })
 })
 
-router.post('/joinRoute', function (req, res, next) {
+router.post('/voteRoute', function (req, res, next) {
     let user = req.session.name;
-    let voteFor = req.body.voteDor;
-    url = 'http://' + constPara.backEndUrl() + '/square/joinRoute';
-    request({url: url, method: 'POST', form: {user: user, voteFor: voteFor}},
+    let voteFor = req.body.voteFor;
+    let detailRouteID = req.body.detailRouteID;
+    console.log({user: user, voteFor: voteFor, detailRouteID: detailRouteID});
+    url = 'http://' + constPara.backEndUrl() + '/square/voteRoute';
+    request({url: url, method: 'POST', form: {user: user, voteFor: voteFor, detailRouteID: detailRouteID}},
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let success = JSON.parse(body)['success'];

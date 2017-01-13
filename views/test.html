@@ -6,20 +6,22 @@
     <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
+lalala
 This is a <p>index</p>
 </body>
 <script>
+    flask = 'http://localhost:5000';
     $.ajax({
         type: "POST",
-        url: "/selectSpots/submitSelectedSpots",
+//        url: "/selectSpots/submitSelectedSpots",
+        url: "/square/getSelectedRoute",
         data: {
-            date: ['01/01/2017', '01/03/2017'],
-            spots_id: ['5877149aa7c709a8e057e9ea', '5877149aa7c709a8e057e9eb', '5877149aa7c709a8e057e9ec', '5877149aa7c709a8e057e9ed', '5877149aa7c709a8e057e9ef', '5877149aa7c709a8e057e9f0', '5877149aa7c709a8e057e9f1', '5877149aa7c709a8e057e9f2', '5877149aa7c709a8e057e9f3']
+//            data: JSON.stringify({
+//                date: ['01/01/2017', '01/03/2017'],
+//                spots_id: ['587787fea7c70948c47f6f28', '587787fea7c70948c47f6f29', '587787fea7c70948c47f6f2a', '587787fea7c70948c47f6f2b', '587787fea7c70948c47f6f2d', '587787fea7c70948c47f6f2e', '587787fea7c70948c47f6f2f', '587787fea7c70948c47f6f30', '587787fea7c70948c47f6f31']
+//            })
+            detailRouteID: "58784b0fa7c7097afb5e45b0"
         },
-//        url: "http://127.0.0.1:5000/selectSpots/getAllSpots",
-//        data: {
-//            cityName: "上海"
-//        },
         success: function (data) {
             console.log(data);
         }

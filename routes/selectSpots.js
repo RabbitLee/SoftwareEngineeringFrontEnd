@@ -51,10 +51,18 @@ router.post('/getAllSpots', function(req, res, next) {
                 res.send({'spots': spots});
             }
         })
+
 });
 
 router.post('/submitSelectedSpots', function (req, res, next) {
-    console.log(req.body);
+    // data = JSON.parse(req.body.data);
+    url = "http://" + constPara.backEndUrl() + '/selectSpots/submitSelectedSpots';
+    request({url: url, method: 'POST', form: {data: req.body.data}},
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                res.send(JSON.parse(body));
+            }
+        })
 })
 
 module.exports = router;
