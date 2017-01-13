@@ -65,4 +65,15 @@ router.post('/submitSelectedSpots', function (req, res, next) {
         })
 })
 
+router.post('/confirmSelectedSppts', function (req, res, next) {
+    url = 'http://' + constPara.backEndUrl() + '/confirmSelectedSpots';
+    request({url: url, method: 'POST', form: {data: req.body.data}},
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                res.send(JSON.parse(body));
+            }
+        }
+    )
+})
+
 module.exports = router;

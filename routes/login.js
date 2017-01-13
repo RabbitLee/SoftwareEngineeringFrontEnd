@@ -22,7 +22,7 @@ router.post('/isUserValid', function (req, res, next) {
              let isValid = JSON.parse(body)['isValid'];
              // console.log('before:');
              // console.log(req.session.name);
-             if (isValid == true) {
+             if (isValid) {
                  req.session.name = name;
                  req.session.password = password;
              }
@@ -35,6 +35,10 @@ router.post('/isUserValid', function (req, res, next) {
 
 router.post('/whetherLogin', function (req, res, next) {
     res.send({name: req.session.name});
+})
+
+router.post('/whetherAgencyLogin', function (req, res, next) {
+    res.send({name: req.session.agencyName});
 })
 
 module.exports = router;
