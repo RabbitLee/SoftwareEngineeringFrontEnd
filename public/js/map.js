@@ -202,7 +202,7 @@ function changeSpot(city_value){ //更改城市时触发的函数，生成新的
 }
 
 function postPlan() {
-
+    console.log(123234324);
     var dpd1 = document.getElementById("dpd1").value;
     var dpd2 = document.getElementById("dpd2").value;
     if(dpd1 == ""||dpd2 == "" ){
@@ -230,6 +230,8 @@ function postPlan() {
         return false;
     }
 
+    console.log([dpd1, dpd2]);
+    console.log(addSpotList);
      $.ajax({
         url: '/selectSpots/submitSelectedSpots',
         data: {
@@ -243,7 +245,7 @@ function postPlan() {
         dataType: 'json',
         success: function (data) {
             myRoute = data;
-
+            console.log(data);
         },
         error: function () {
             alert("上传景点数据失败！");
@@ -255,10 +257,11 @@ function postPlan() {
     $(".content").hide();
 
     $("#RouteContent").show();
-    myRoute ={"spots_id": [["1", "2"],["2","3"]],
-        "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
-        "name": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
-        "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
+    console.log(myRoute);
+    // myRoute ={"spots_id": [["1", "2"],["2","3"]],
+    //     "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
+    //     "name": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
+    //     "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
     var colorID = 0;
 
     var insertDate = "旅行日期: "+dpd1+" ~ "+dpd2;
@@ -389,6 +392,13 @@ function reChoose() {
 function confirmRoute() {
     var dpd1 = document.getElementById("dpd1").value;
     var dpd2 = document.getElementById("dpd2").value;
+    console.log(JSON.stringify({
+            shared: $("input[name='shared']:checked").val(),
+            spots_id: addSpotList,
+            date: [dpd1,dpd2],
+            time: myRoute.time,
+        }));
+
     $.ajax({
         url: '/selectSpots/confirmSelectedSpots',
         data: {

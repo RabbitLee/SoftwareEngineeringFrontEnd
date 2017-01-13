@@ -56,18 +56,33 @@ router.post('/getAllSpots', function(req, res, next) {
 
 router.post('/submitSelectedSpots', function (req, res, next) {
     // data = JSON.parse(req.body.data);
+    data = req.body.data;
     url = "http://" + constPara.backEndUrl() + '/selectSpots/submitSelectedSpots';
-    request({url: url, method: 'POST', form: {data: req.body.data}},
+    console.log(new Date);
+    request({url: url, method: 'POST', form: {data: data}},
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
+                console.log(new Date);
                 res.send(JSON.parse(body));
             }
         })
+    // url = "http://" + constPara.backEndUrl() + '/login/isUserValid';
+    // request({url: url, method: 'POST', form: {name: '李逸超', password: 'lyc'}},
+    //     (error, response, body) => {
+    //         if (!error && response.statusCode == 200) {
+    //             console.log(new Date - start);
+    //             res.send(JSON.parse(body));
+    //         }
+    //     }
+    // )
 })
 
-router.post('/confirmSelectedSppts', function (req, res, next) {
-    url = 'http://' + constPara.backEndUrl() + '/confirmSelectedSpots';
-    request({url: url, method: 'POST', form: {data: req.body.data}},
+router.post('/confirmSelectedSpots', function (req, res, next) {
+    url = 'http://' + constPara.backEndUrl() + '/selectSpots/confirmSelectedSpots';
+    data = JSON.parse(req.body.data);
+    data.user = req.session.name;
+    data = JSON.stringify(data);
+    request({url: url, method: 'POST', form: {data: data}},
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 res.send(JSON.parse(body));
