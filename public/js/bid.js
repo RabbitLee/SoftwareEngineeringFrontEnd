@@ -1,7 +1,7 @@
 /**
  * Created by zhaoangyouyou on 11/01/2017.
  */
-var voteFlag  = 0;
+var isBid = 0;
 $(function () {
     $.ajax({
         url: "/square/showRouteInPage",
@@ -145,7 +145,7 @@ function ViewRoute(routeId) {
     clearLastScene();
     // console.log(routeId);
     $.ajax({
-        url: '/square/getSelectedRoute',
+        url: '/agencyPersonInfo/getSelectedRoute',
         data: {
             "detailRouteID": routeId,
         },
@@ -196,50 +196,54 @@ function ViewRoute(routeId) {
                     '<label>'+item.agencyID+' 出价: '+item.fare+'RMB (累计'+item.poll+'票）</label>'
                 );
             });
-            if(myRoute.myVote != null){
-
-                for(var j=0; j< document.getElementsByName("vote").length;j++)
-                {
-
-                    if(document.getElementsByName("vote")[j].value == myRoute.myVote)
-                    {
-
-                        document.getElementsByName("vote")[j].checked = true;
-                    }
-                }
-            }
+            $.each(myRoute.agency, function (index, item) { //遍历返回的json
+                if(item.fare != null)
+                isBid = 1;
+            });
+            // if(myRoute.myVote != null){
+            //
+            //     for(var j=0; j< document.getElementsByName("vote").length;j++)
+            //     {
+            //
+            //         if(document.getElementsByName("vote")[j].value == myRoute.myVote)
+            //         {
+            //
+            //             document.getElementsByName("vote")[j].checked = true;
+            //         }
+            //     }
+            // }
 
             //判断能不能投票加入
-            let username = null;
-            $.ajax({
-                url: '/login/whetherLogin',
-                data: null,
-                type: 'post',
-                async: false,
-                dataType: 'json',
-                success: function (data) {
-                    username = data.name;
-                }
-            });
-
-            $.each(myRoute.participants, function (index, item) { //遍历返回的json
-                if(item[0]==username){
-                    voteFlag = 1;
-                }
-
-            });
-            if(myRoute.myVote != null){
-
-                for(var j=0; j< document.getElementsByName("vote").length;j++)
-                {
-
-                    if(document.getElementsByName("vote")[j].value == myRoute.myVote)
-                    {
-
-                        document.getElementsByName("vote")[j].checked = true;
-                    }
-                }
-            }
+            // let username = null;
+            // $.ajax({
+            //     url: '/login/whetherLogin',
+            //     data: null,
+            //     type: 'post',
+            //     async: false,
+            //     dataType: 'json',
+            //     success: function (data) {
+            //         username = data.name;
+            //     }
+            // });
+            //
+            // $.each(myRoute.participants, function (index, item) { //遍历返回的json
+            //     if(item[0]==username){
+            //         voteFlag = 1;
+            //     }
+            //
+            // });
+            // if(myRoute.myVote != null){
+            //
+            //     for(var j=0; j< document.getElementsByName("vote").length;j++)
+            //     {
+            //
+            //         if(document.getElementsByName("vote")[j].value == myRoute.myVote)
+            //         {
+            //
+            //             document.getElementsByName("vote")[j].checked = true;
+            //         }
+            //     }
+            // }
 
             RouteMap.clearMap();
             for(var i = 0; i < myRoute.coordinate.length; i++){
@@ -485,7 +489,31 @@ function loadTransfer(start,destination) {
 }
 
 function bid() {
+    if(isBid){
+        if(confirm("你已经出过价了，确定要重新出价吗:）"))
+        {
+            $.ajax({
+                url: '/square/bidForRoute',
+                data: {
+                    //user:
+                    bidFor: myRoute.routeID,
+                    fare: $("input[name='money']").val()
 
+                },
+                type: 'post',
+                async: false, //同步
+                dataType: 'json',
+                success: function (data) {
+                    ViewRoute();
+                },
+                error: function () {
+                    alert("竞价失败！");
+                    ViewRoute();
+                }
+            });
+        }
+    }
+    else{
         $.ajax({
             url: '/square/bidForRoute',
             data: {
@@ -505,6 +533,9 @@ function bid() {
                 ViewRoute();
             }
         });
+
+    }
+
 
 }
 

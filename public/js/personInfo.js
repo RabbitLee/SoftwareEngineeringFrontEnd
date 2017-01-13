@@ -2,7 +2,7 @@
  * Created by zhaoangyouyou on 28/12/2016.
  */
 
-
+var isVote = 0
 
 $(document).ready(function() {
 
@@ -539,7 +539,7 @@ function ViewRoute(routeId) {
                 );
             });
             if(myRoute.myVote != null){
-
+                sVote = 1;
                 for(var j=0; j< document.getElementsByName("vote").length;j++)
                 {
 
@@ -686,23 +686,50 @@ function loadTransfer(start,destination) {
 }
 
 function voteFor() {
-        $.ajax({
-            url: '/square/voteRoute',
-            data: {
-                //user:
-                voteFor: $("input[name='vote']:checked").val()
-            },
-            type: 'post',
-            async: false, //同步
-            dataType: 'json',
-            success: function (data) {
-                ViewRoute();
-            },
-            error: function () {
-                alert("投票失败！");
-                ViewRoute();
+        if(isVote){
+            if(confirm("你已经投过票了，确定要重新投票吗:）"))
+            {
+                $.ajax({
+                    url: '/square/voteRoute',
+                    data: {
+                        //user:
+                        voteFor: $("input[name='vote']:checked").val(),
+                        detailRouteID: myRoute.routeID
+                    },
+                    type: 'post',
+                    async: false, //同步
+                    dataType: 'json',
+                    success: function (data) {
+                        ViewRoute(myRoute.routeID);
+                    },
+                    error: function () {
+                        alert("投票失败！");
+                        ViewRoute(myRoute.routeID);
+                    }
+                });
             }
-        });
+        }
+        else {
+            $.ajax({
+                url: '/square/voteRoute',
+                data: {
+                    //user:
+                    voteFor: $("input[name='vote']:checked").val(),
+                    detailRouteID: myRoute.routeID
+                },
+                type: 'post',
+                async: false, //同步
+                dataType: 'json',
+                success: function (data) {
+                    ViewRoute(myRoute.routeID);
+                },
+                error: function () {
+                    alert("投票失败！");
+                    ViewRoute(myRoute.routeID);
+                }
+            });
+        }
+
 
 }
 

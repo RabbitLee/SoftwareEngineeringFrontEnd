@@ -423,7 +423,7 @@ function ViewRoute(routeId) {
     clearLastScene();
     // console.log(routeId);
     $.ajax({
-        url: '/square/getSelectedRoute',
+        url: '/agencyPersonInfo/getSelectedRoute',
         data: {
             "detailRouteID": routeId,
         },
@@ -460,7 +460,6 @@ function ViewRoute(routeId) {
             document.getElementById("cityLabel").innerHTML = insertCity;
 
             //移除不是该旅行团的人
-            removeByValue(myRoute.participants, isLogin);
 
 
             $("#othersLabel").append(
@@ -468,7 +467,7 @@ function ViewRoute(routeId) {
             );
             $.each(myRoute.participants, function (index, item) { //遍历返回的json
                     $("#othersLabel").append(
-                        ", "+item[0]
+                        ", "+item[0]+"("+item[3]+" 联系方式："+item[2]+")"
                     );
 
             });
@@ -492,17 +491,17 @@ function ViewRoute(routeId) {
             }
 
             //判断能不能投票加入
-            let username = null;
-            $.ajax({
-                url: '/login/whetherLogin',
-                data: null,
-                type: 'post',
-                async: false,
-                dataType: 'json',
-                success: function (data) {
-                    username = data.name;
-                }
-            });
+            // let username = null;
+            // $.ajax({
+            //     url: '/login/whetherLogin',
+            //     data: null,
+            //     type: 'post',
+            //     async: false,
+            //     dataType: 'json',
+            //     success: function (data) {
+            //         username = data.name;
+            //     }
+            // });
 
             $.each(myRoute.participants, function (index, item) { //遍历返回的json
                 if(item[0]==username){
@@ -628,27 +627,52 @@ function loadTransfer(start,destination) {
 }
 
 function bid() {
+    if(isBid){
+        if(confirm("你已经出过价了，确定要重新出价吗:）"))
+        {
+            $.ajax({
+                url: '/square/bidForRoute',
+                data: {
+                    //user:
+                    bidFor: myRoute.routeID,
+                    fare: $("input[name='money']").val()
 
-    $.ajax({
-        url: '/square/bidForRoute',
-        data: {
-            //user:
-            bidFor: myRoute.routeId,
-            fare: $("input[name='money']").val()
-
-        },
-        type: 'post',
-        async: false, //同步
-        dataType: 'json',
-        success: function (data) {
-            ViewRoute();
-        },
-        error: function () {
-            alert("竞价失败！");
-            ViewRoute();
+                },
+                type: 'post',
+                async: false, //同步
+                dataType: 'json',
+                success: function (data) {
+                    ViewRoute();
+                },
+                error: function () {
+                    alert("竞价失败！");
+                    ViewRoute();
+                }
+            });
         }
-    });
+    }
+    else{
+        $.ajax({
+            url: '/square/bidForRoute',
+            data: {
+                //user:
+                bidFor: myRoute.routeID,
+                fare: $("input[name='money']").val()
 
+            },
+            type: 'post',
+            async: false, //同步
+            dataType: 'json',
+            success: function (data) {
+                ViewRoute();
+            },
+            error: function () {
+                alert("竞价失败！");
+                ViewRoute();
+            }
+        });
+
+    }
 }
 
 function clearLastScene() {
@@ -683,14 +707,4 @@ function exit() {
 
         }
     });
-}
-
-function removeByValue(arr, val) {
-    for(var i=0; i<arr.length; i++) {
-        if(arr[i][1] != val) {
-            arr.splice(i, 1);
-            //
-            i--;
-        }
-    }
 }
