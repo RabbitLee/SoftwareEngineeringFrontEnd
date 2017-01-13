@@ -7,15 +7,10 @@ $(function () {
         url: "/square/showRouteInPage",
         datatype: 'json',
         type: "post",
-        data: 1,
-        success: function (data) {
-
+        data: {
+            page: 1
         },
-        error: function ()
-        {
-            var data={"list":[{"routeId":"1","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
-                {"routeId":"2","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
-
+        success: function (data) {
             if (data != null) {
                 $.each(data.list, function (index, item) { //遍历返回的json
                     $("#data_table").append(
@@ -29,7 +24,7 @@ $(function () {
                         '<td>' + item.spot[0] + '</td>' +
                         '<td>' + item.spot[1] + '</td>' +
                         '<td>' +
-                        '<button class="btn-view" onclick="ViewRoute('+item.routeId+');">查看</button>' +
+                        '<button class="btn-view" onclick="ViewRoute(\''+item.routeID+'\');">查看</button>' +
                         '</td>' +
                         '</tr>' +
                         '</tbody>' +
@@ -68,17 +63,13 @@ $(function () {
                             type: "post",
                             data: page,
                             success: function (data) {
-
-                            },
-                            error: function () {
-                                var data={"list":[{"routeId":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
-                                    {"routeId":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
+                                // var data={"list":[{"routeId":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
+                                //     {"routeId":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
 
                                 if (data != null) {
                                     $("#data_table tbody").remove();
                                     $.each(data.list, function (index, item) { //遍历返回的json
                                         $("#data_table").append(
-
                                             '<tbody>' +
                                             '<tr>' +
                                             '<td>' + item.creator + '</td>' +
@@ -88,22 +79,29 @@ $(function () {
                                             '<td>' + item.spot[0] + '</td>' +
                                             '<td>' + item.spot[1] + '</td>' +
                                             '<td>' +
-                                            '<button class="btn-view" onclick="ViewRoute( '+item.routeId+' );">查看</button>' +
+                                            '<button class="btn-view" onclick="ViewRoute("'+item.routeId+'");">查看</button>' +
                                             '</td>' +
                                             '</tr>' +
                                             '</tbody>' +
                                             '</table>'
-
                                         );
-
                                     });
                                 }
+                            },
+                            error: function () {
                             }
                         });
                     }
                 };
                 $('#page').bootstrapPaginator(options);
             }
+        },
+        error: function ()
+        {
+            // var data={"list":[{"routeId":"1","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
+            //     {"routeId":"2","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
+
+
         }
     });
 })
@@ -127,6 +125,7 @@ function ViewRoute(routeId) {
     //
     // )
     clearLastScene();
+    // console.log(routeId);
     $.ajax({
         url: '/square/getSelectedRoute',
         data: {
@@ -137,26 +136,22 @@ function ViewRoute(routeId) {
         dataType: 'json',
         success: function (data) {
             myRoute = data;
-        },
-        error: function () {
-            alert("查看失败！");
-            //test
-//test 显示路线
+            // console.log(myRoute);
             $(".content").hide();
 
             $("#RouteContent").show();
-            myRoute ={
-                "routeId":"33",
-                "creator": "zayy",
-                "participants": [["lyc", "旅行社1"], ["hzw", "旅行社2"],["zayy","旅行社1"]],
-                "city":"上海",
-                "myVote": "agency1", //当前用户投票的旅行社
-                "agency": [{"agencyName": "agency1", "fare": 100, "poll": 1}, {"agencyName": "agency2", "fare": 200, "poll": 2}],
-                "spots_id": [["1", "2"],["2","3"]],
-                "date": ["2016/01/01", "2017/12/20"],
-                "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
-                "spotsName": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
-                "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
+            // myRoute ={
+            //     "routeId":"33",
+            //     "creator": "zayy",
+            //     "participants": [["lyc", "旅行社1"], ["hzw", "旅行社2"],["zayy","旅行社1"]],
+            //     "city":"上海",
+            //     "myVote": "agency1", //当前用户投票的旅行社
+            //     "agency": [{"agencyName": "agency1", "fare": 100, "poll": 1}, {"agencyName": "agency2", "fare": 200, "poll": 2}],
+            //     "spots_id": [["1", "2"],["2","3"]],
+            //     "date": ["2016/01/01", "2017/12/20"],
+            //     "time": [[[8, 9], [10, 11]],[[7,8],[12,13]]],
+            //     "spotsName": [["黄浦区", "同济大学"],["同济大学", "五角场"]],
+            //     "coordinate": [[[121.47519,31.228833],[121.506357,31.282086]],[[121.506357,31.282086],[121.514222,31.302853]]]};
 
             var colorID = 0;
 
@@ -179,25 +174,36 @@ function ViewRoute(routeId) {
             });
             //旅行社投票
             $.each(myRoute.agency, function (index, item) { //遍历返回的json
+                // console.log(item);
                 $("#agencyLabel").append(
-                    '<label><input name="vote" type="radio" value='+item.agencyName+'>'+item.agencyName+' 出价: '+item.fare+'RMB (累计'+item.poll+'票）</label>'
+                    '<label><input name="vote" type="radio" value="'+item.agencyID+'">'+item.agencyID+' 出价: '+item.fare+'RMB (累计'+item.poll+'票）</label>'
                 );
             });
             if(myRoute.myVote != null){
 
-                    for(var j=0; j< document.getElementsByName("vote").length;j++)
+                for(var j=0; j< document.getElementsByName("vote").length;j++)
+                {
+
+                    if(document.getElementsByName("vote")[j].value == myRoute.myVote)
                     {
 
-                        if(document.getElementsByName("vote")[j].value == myRoute.myVote)
-                        {
-
-                            document.getElementsByName("vote")[j].checked = true;
-                        }
+                        document.getElementsByName("vote")[j].checked = true;
                     }
+                }
             }
 
             //判断能不能投票加入
-            var username = "zayy"
+            let username = null;
+            $.ajax({
+                url: '/login/whetherLogin',
+                data: null,
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    username = data.name;
+                }
+            });
 
             $.each(myRoute.participants, function (index, item) { //遍历返回的json
                 if(item[0]==username){
@@ -272,7 +278,9 @@ function ViewRoute(routeId) {
                 infoWindow.open(RouteMap, e.target.getPosition());
             }
 
-
+        },
+        error: function () {
+            alert("查看失败！");
         }
     });
     window.location.href = "#head-bar";
@@ -309,21 +317,23 @@ function loadTransfer(start,destination) {
 }
 
 function joinRoute() {
+    // console.log(myRoute.routeID);
     $.ajax({
         url: '/square/joinRoute',
         data: {
             //user:
-            detailRouteID: myRoute.routeId
+            detailRouteID: myRoute.routeID
         },
         type: 'post',
         async: false, //同步
         dataType: 'json',
         success: function (data) {
-            ViewRoute();
+            console.log(data);
+            ViewRoute(myRoute.routeID);
         },
         error: function () {
             alert("加入失败！");
-            ViewRoute();
+            ViewRoute(myRoute.routeID);
         }
     });
 }
@@ -339,17 +349,17 @@ function voteFor() {
             data: {
                 //user:
                 voteFor: $("input[name='vote']:checked").val(),
-                detailRouteID: myRoute.routeId
+                detailRouteID: myRoute.routeID
             },
             type: 'post',
             async: false, //同步
             dataType: 'json',
             success: function (data) {
-                ViewRoute();
+                ViewRoute(myRoute.routeID);
             },
             error: function () {
                 alert("投票失败！");
-                ViewRoute();
+                ViewRoute(myRoute.routeID);
             }
         });
     }

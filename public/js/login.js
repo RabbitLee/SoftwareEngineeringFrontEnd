@@ -190,7 +190,7 @@ function Agencycheck(){
 
 
     $.ajax({
-        url: '/AgencyLogin/isUserValid',
+        url: '/agencyLogin/isUserValid',
         data: {
             "name": name,
             "password": password,

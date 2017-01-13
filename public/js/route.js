@@ -38,7 +38,7 @@ function changeCity(prov_value){  //选中省份的时候触发城市
     {
         select_city.options.length=0;
         select_city.options.add(new Option("请选择城市",""));
-        select_city.options[0].disabled = true;
+        // select_city.options[0].disabled = true;
         var cityArr = getCity(prov_value);
         // var cityArr = {"cities": ["北京市","上海市"]};//test
 
@@ -51,7 +51,7 @@ function changeCity(prov_value){  //选中省份的时候触发城市
     else{
         select_city.options.length=0;
         select_city.options.add(new Option("请选择城市",""));
-        select_city.disabled = true;
+        // select_city.disabled = true;
     }
     CacheProv = prov_value;
 
