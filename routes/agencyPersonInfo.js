@@ -39,6 +39,7 @@ router.post('/getSelectedRoute', function (req, res, next) {
     request({url: url, method: 'POST', form: {agencyname: name, detailRouteID: detailRouteID}},
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
+                console.log(JSON.parse(body));
                 res.send(JSON.parse(body));
             }
         })

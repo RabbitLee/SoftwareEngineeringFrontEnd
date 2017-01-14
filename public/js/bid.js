@@ -153,7 +153,7 @@ function ViewRoute(routeId) {
         async: false, //同步
         dataType: 'json',
         success: function (data) {
-            myRoute = data;
+            myRoute = data.list;
             // console.log(myRoute);
             $(".content").hide();
 
@@ -174,6 +174,7 @@ function ViewRoute(routeId) {
             var colorID = 0;
 
             //文字说明
+            // console.log(myRoute);
             var insertDate = "旅行日期: "+myRoute.date[0]+" ~ "+myRoute.date[1];
             var insertCity = "目的城市: "+myRoute.city;
             var insertCreator = "创建者: "+myRoute.creator;
@@ -492,11 +493,12 @@ function bid() {
     if(isBid){
         if(confirm("你已经出过价了，确定要重新出价吗:）"))
         {
+            console.log(myRoute.routeId);
             $.ajax({
                 url: '/square/bidForRoute',
                 data: {
                     //user:
-                    bidFor: myRoute.routeID,
+                    bidFor: myRoute.routeId,
                     fare: $("input[name='money']").val()
 
                 },
@@ -504,11 +506,11 @@ function bid() {
                 async: false, //同步
                 dataType: 'json',
                 success: function (data) {
-                    ViewRoute();
+                    ViewRoute(myRoute.routeId);
                 },
                 error: function () {
                     alert("竞价失败！");
-                    ViewRoute();
+                    ViewRoute(myRoute.routeId);
                 }
             });
         }
@@ -526,11 +528,11 @@ function bid() {
             async: false, //同步
             dataType: 'json',
             success: function (data) {
-                ViewRoute();
+                ViewRoute(myRoute.routeId);
             },
             error: function () {
                 alert("竞价失败！");
-                ViewRoute();
+                ViewRoute(myRoute.routeId);
             }
         });
 

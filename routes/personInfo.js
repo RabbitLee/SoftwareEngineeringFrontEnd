@@ -52,7 +52,7 @@ router.post('/showAllAgency', function (req, res, next) {
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let list = JSON.parse(body)['list'];
-                // console.log(list);
+                console.log(list);
                 let len = list.length;
                 let pageCount = Math.ceil(len/number_in_a_page);
                 let start = (page-1)*number_in_a_page;

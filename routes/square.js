@@ -53,6 +53,8 @@ router.post('/getSelectedRoute', function (req, res, next) {
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let detaileRoute = JSON.parse(body);
+                console.log('lalallalalala');
+                console.log(detaileRoute);
                 res.send(detaileRoute);
             }
         })
@@ -88,7 +90,7 @@ router.post('/voteRoute', function (req, res, next) {
 })
 
 router.post('/bidForRoute', function (req, res, next) {
-    let agency = req.session.name;
+    let agency = req.session.agencyName;
     let bidFor = req.body.bidFor;
     let fare = req.body.fare;
     url = 'http://' + constPara.backEndUrl() + '/square/bidForRoute';

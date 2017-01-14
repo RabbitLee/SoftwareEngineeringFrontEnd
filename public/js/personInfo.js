@@ -32,13 +32,27 @@ $(document).ready(function() {
     });
 
     /*初始化个人信息*/
-    document.getElementById("usernamesignup").value = "zayy";
+    let name = null;
+    $.ajax (
+        {
+            url: "/login/whetherLogin",
+            datatype: 'json',
+            type: 'post',
+            async: false,
+            data: {
+            },
+            success: function (data) {
+                name = data.name;
+            }
+        }
+    )
+    document.getElementById("usernamesignup").value = name;
 
-    document.getElementById("passwordsignup").value = "1234";
+    document.getElementById("passwordsignup").value = "23745357342@qq.com";
 
-    document.getElementById("emailsignup").value = "8070@qq.com";
+    document.getElementById("emailsignup").value = "80737453570@qq.com";
 
-    document.getElementById("telesignup").value = "1234";
+    document.getElementById("telesignup").value = "18247547373";
 
     /*初始个人中心*/
     $.ajax({
