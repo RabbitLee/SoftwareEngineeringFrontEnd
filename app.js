@@ -54,6 +54,7 @@ app.use('/agencySquare', agencySquare);
 app.use('/agencyCenter', agencyCenter);
 app.use('/agencyLogin', agencyLogin);
 app.use('/agencyPersonInfo', agencyPersonInfo);
+app.use('/', index);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
