@@ -32,21 +32,13 @@ $(document).ready(function() {
 
     /*初始个人中心*/
     $.ajax({
-        url: "/personInfo/showAgencyRoute",
+        url: "/agencyPersonInfo/showAgencyRoute",
         datatype: 'json',
         type: "post",
         data:   {
             page: 1
         },
         success: function (data) {
-
-        },
-        error: function ()
-        {
-
-            var data={"list":[{"routeID":"1","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
-                {"routeID":"2","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
-
             if (data != null) {
                 $.each(data.list, function (index, item) { //遍历返回的json
                     $("#data_table").append(
@@ -101,12 +93,6 @@ $(document).ready(function() {
                                 "page": page
                             },
                             success: function (data) {
-
-                            },
-                            error: function () {
-                                var data={"list":[{"routeID":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
-                                    {"routeID":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
-
                                 if (data != null) {
                                     $("#data_table tbody").remove();
                                     $.each(data.list, function (index, item) { //遍历返回的json
@@ -131,12 +117,26 @@ $(document).ready(function() {
 
                                     });
                                 }
+                            },
+                            error: function () {
+                                // var data={"list":[{"routeID":"1","creator":"zaaaayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
+                                //     {"routeID":"2","creator":"yoyoyo","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
+
+
                             }
                         });
                     }
                 };
                 $('#page').bootstrapPaginator(options);
             }
+        },
+        error: function ()
+        {
+
+            // var data={"list":[{"routeID":"1","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]},
+            //     {"routeID":"2","creator":"zayy","date":["2017/01/02","2017/01/10"],"city":"上海","spot":["start_spot","end_spot"]}],"pageCount":10,"CurrentPage":"1"};
+
+
         }
     });
     // $.ajax({
@@ -431,7 +431,8 @@ function ViewRoute(routeId) {
         async: false, //同步
         dataType: 'json',
         success: function (data) {
-            myRoute = data;
+            console.log(data);
+            myRoute = data.list;
             // console.log(myRoute);
             $(".content").hide();
 
@@ -467,7 +468,7 @@ function ViewRoute(routeId) {
             );
             $.each(myRoute.participants, function (index, item) { //遍历返回的json
                     $("#othersLabel").append(
-                        ", "+item[0]+"("+item[3]+" 联系方式："+item[2]+")"
+                        ", ["+item[0]+"("+item[2]+") 联系方式："+item[1]+"]"
                     );
 
             });
@@ -491,20 +492,20 @@ function ViewRoute(routeId) {
             }
 
             //判断能不能投票加入
-            // let username = null;
-            // $.ajax({
-            //     url: '/login/whetherLogin',
-            //     data: null,
-            //     type: 'post',
-            //     async: false,
-            //     dataType: 'json',
-            //     success: function (data) {
-            //         username = data.name;
-            //     }
-            // });
+            let username = null;
+            $.ajax({
+                url: '/login/whetherLogin',
+                data: null,
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    username = data.name;
+                }
+            });
 
             $.each(myRoute.participants, function (index, item) { //遍历返回的json
-                if(item[0]==username){
+                if(item[0] == username){
                     voteFlag = 1;
                 }
 

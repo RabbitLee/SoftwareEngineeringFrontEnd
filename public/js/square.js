@@ -196,7 +196,7 @@ function ViewRoute(routeId) {
                     '<label><input name="vote" type="radio" value="'+item.agencyID+'">'+item.agencyID+' 出价: '+item.fare+'RMB (累计'+item.poll+'票）</label>'
                 );
             });
-            if(myRoute.myVote != null){
+            if(myRoute.myVote != "False") {
 
                 isVote = 1;
                 for(var j=0; j< document.getElementsByName("vote").length;j++)

@@ -14,13 +14,16 @@ This is a <p>index</p>
     $.ajax({
         type: "POST",
 //        url: "/selectSpots/submitSelectedSpots",
-        url: "/square/getSelectedRoute",
+        url: "/personInfo/showAllAgency",
         data: {
+            page: 1
+//            detailRouteID: "58797135a7c709bbacc588b6"
+//            userID: "华泽文"
 //            data: JSON.stringify({
 //                date: ['01/01/2017', '01/03/2017'],
 //                spots_id: ['587787fea7c70948c47f6f28', '587787fea7c70948c47f6f29', '587787fea7c70948c47f6f2a', '587787fea7c70948c47f6f2b', '587787fea7c70948c47f6f2d', '587787fea7c70948c47f6f2e', '587787fea7c70948c47f6f2f', '587787fea7c70948c47f6f30', '587787fea7c70948c47f6f31']
 //            })
-            detailRouteID: "58784b0fa7c7097afb5e45b0"
+//            detailRouteID: "58784b0fa7c7097afb5e45b0"
         },
         success: function (data) {
             console.log(data);

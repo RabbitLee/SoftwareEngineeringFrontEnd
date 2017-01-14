@@ -289,6 +289,9 @@ function postPlan() {
                 offset: new AMap.Pixel(10, -25),
                 content: myRoute.name[i][j],
             });
+           
+
+            console.log(myRoute.time);
             marker.content = '<h3 style="text-align: center">'+ myRoute.name[i][j]+'</h3>' +
                 '<h4 style="text-align: center">推荐开始游玩时间：'+myRoute.time[i][j][0]+'点, 结束游玩时间：'+myRoute.time[i][j][1]+'点</h4> ';
             //给Marker绑定单击事件
@@ -392,19 +395,19 @@ function reChoose() {
 function confirmRoute() {
     var dpd1 = document.getElementById("dpd1").value;
     var dpd2 = document.getElementById("dpd2").value;
-    console.log(JSON.stringify({
-            shared: $("input[name='shared']:checked").val(),
-            spots_id: addSpotList,
-            date: [dpd1,dpd2],
-            time: myRoute.time,
-        }));
+    // console.log(JSON.stringify({
+    //         shared: $("input[name='shared']:checked").val(),
+    //         spots_id: addSpotList,
+    //         date: [dpd1,dpd2],
+    //         time: myRoute.time,
+    //     }));
 
     $.ajax({
         url: '/selectSpots/confirmSelectedSpots',
         data: {
             data: JSON.stringify({
                 shared: $("input[name='shared']:checked").val(),
-                spots_id: addSpotList,
+                spots_id: myRoute.spots_id,
                 date: [dpd1,dpd2],
                 time: myRoute.time,
             })

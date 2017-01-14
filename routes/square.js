@@ -29,7 +29,7 @@ router.post('/showRouteInPage', function (req, res, next) {
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let list = JSON.parse(body)['list'];
-                // console.log(list);
+                console.log(list);
                 let len = list.length;
                 let pageCount = Math.ceil(len/number_in_a_page);
                 let start = (page-1)*number_in_a_page;
@@ -47,7 +47,7 @@ router.post('/showRouteInPage', function (req, res, next) {
 router.post('/getSelectedRoute', function (req, res, next) {
     let user = req.session.name;
     let detailRouteID = req.body.detailRouteID;
-    // console.log({user:user, detailRouteID: detailRouteID});
+    console.log({user:user, detailRouteID: detailRouteID});
     url = 'http://' + constPara.backEndUrl() + '/square/getSelectedRoute';
     request({url: url, method: 'POST', form: {user:user, detailRouteID: detailRouteID}},
         (error, response, body) => {
